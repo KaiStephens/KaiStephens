@@ -14,27 +14,49 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            flex-wrap: wrap;
         }
         .container {
             background: white;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             padding: 20px;
-            width: 500px;
+            margin: 10px;
+            width: calc(50% - 20px);
+            box-sizing: border-box;
         }
-        h1 {
+        .gpt-link-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            margin: 10px;
+            width: calc(25% - 20px);
+            min-height: 500px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        .gpt-link-container h2,
+        .gpt-link-container p,
+        .gpt-link-container a {
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        h1, h2 {
             text-align: center;
             color: #333;
         }
         textarea {
-            width: 95.5%;
-            height: 100px;
+            width: calc(100% - 20px);
+            height: 200px;
             margin-bottom: 10px;
             padding: 10px;
             border-radius: 4px;
             border: 1px solid #ddd;
-            resize: none;
+            resize: vertical;
             font-size: 16px;
+            box-sizing: border-box;
         }
         button {
             width: 100%;
@@ -56,6 +78,19 @@
             font-size: 14px;
             color: #28a745;
         }
+        .gpt-link {
+            display: block;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .gpt-link:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
@@ -66,6 +101,11 @@
         <textarea id="outputText" readonly></textarea>
         <button onclick="copyText()">Copy</button>
         <div id="copiedText" class="feedback"></div>
+    </div>
+    <div class="gpt-link-container">
+        <h2>Need Help with Writing?</h2>
+        <p>If you have access to GPT-4, use it to enhance your writing:</p>
+        <a href="https://chat.openai.com/g/g-Fhxn87Y86-school-writer" target="_blank" class="gpt-link">Use GPT-4 for Writing</a>
     </div>
     <script>
         function updateInput() {
