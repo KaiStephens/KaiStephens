@@ -40,8 +40,9 @@
         .gpt-link-container p,
         .gpt-link-container a {
             text-align: center;
-            margin-left: auto;
-            margin-right: auto;
+            margin-left: 20px;
+            margin-right: 20px;
+
         }
         h1, h2 {
             text-align: center;
@@ -73,6 +74,9 @@
         button:hover {
             background-color: #0056b3;
         }
+        #text1 {
+            margin-top: 130px;
+        }
         .feedback {
             text-align: center;
             font-size: 14px;
@@ -101,11 +105,13 @@
         <textarea id="outputText" readonly></textarea>
         <button onclick="copyText()">Copy</button>
         <div id="copiedText" class="feedback"></div>
-    </div>
+    </div>    
     <div class="gpt-link-container">
+        <div id="text1">
         <h2>Need Help with Writing?</h2>
         <p>If you have access to GPT-4, use it to enhance your writing:</p>
         <a href="https://chat.openai.com/g/g-Fhxn87Y86-school-writer" target="_blank" class="gpt-link">Use GPT-4 for Writing</a>
+    </div>
     </div>
     <script>
         function updateInput() {
