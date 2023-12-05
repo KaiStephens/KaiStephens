@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>StephensK - BunnyWalker</title>
+    <style>
+        body {
+            background-color: #c5c2c2;
+            overflow: hidden;
+        }
+        #movingGif {
+            position: absolute;
+            width: 100px;
+            height: auto;
+            transition: left 0.08s , top 0.08s linear;
+        }
+        #backround, #backround2 {
+            position: absolute;
+            top: 0px;
+            left: -750px;
+            width: 200%;
+            height: auto;
+        }
+        #background {
+            top: 0px;
+        }
+        #background2 {
+            top: -1000px; 
+        }
+        .coin {
+            position: absolute;
+            width: 30px;
+            height: auto;
+            z-index: 1;
+        }
+        .coin2 {
+            position: absolute;
+            width: 30px;
+            height: auto;
+            z-index: 1;
+        }
+        #scoreboard {
+            position: absolute;
+            left: 30px;
+            background-color: white;
+            border: white solid 10px;
+            border-radius: 10px;
+            z-index: 100;
+        }
+        #startbutton {
+            z-index: 150;
+            position: absolute;
+            top: 250px;
+            left: 590px;
+            width: 400px;
+            height: 200px;
+            background: linear-gradient(45deg, black, #bfe9ff); 
+            color: white; 
+            font-size: 30px; 
+            font-family: 'Arial', sans-serif;
+            border: 2px solid #fff; 
+            border-radius: 15px; 
+        }
+        #headlights {
+            z-index: 150;
+            position: absolute;
+            top: 600px;
+            left: 1300px;
+            width: 200px;
+            height: 100px;
+            background: linear-gradient(45deg, black, #bfe9ff); 
+            color: white; 
+            font-size: 30px; 
+            font-family: 'Arial', sans-serif;
+            border: 2px solid #fff; 
+            border-radius: 15px; 
+        }
+    </style>
+</head>
+<body>
+    <button id="headlights" onclick="changeHeadlights()">Headlights</button>
+    <button id="startbutton" onclick="startgame()">Start game</button>
+    <h1 id = scoreboard>Points: 0</h1>
+    <img id="backround2" src="image.png">
+    <img id="backround" src="image.png">
+    <img id="movingGif" src="tile000 (1).png"/>
+    <script>
+        let spawnSpecial = 0
+        let score = 0
+        let y = 0
+        let y1 = 0
+        let y2 = -1000;
+        let headlightsON = false
+        let rotationAngle = 0
+        const maxHeight = 1000;
+
+        function changeHeadlights() {
+            if (headlightsON == true) {
+                headlightsON = false
+                movingGif.src = "tile000 (1).png"
+            } else {
+                headlightsON = true
+                movingGif.src = "tile009 (1).png"
+            }
+            let rotationAngle = 0
+        }
+
+        function startgame() {
+            setInterval(spawnCoins, 1000);
+            movingGif = document.getElementById('movingGif');
+            document.getElementById("startbutton").style.display = "none";
+            posX = 750;
+            posY = 600;
+            requestAnimationFrame(moveGif);
+            requestAnimationFrame(moveBackgrounds);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const movingGif = document.getElementById('movingGif');
+
+            let posX = 750;
+            let posY = 600;
+            let arrow
+        
+            function moveGif(x, y) {
+                movingGif.style.left = posX + 'px';
+                movingGif.style.top = posY + 'px';
+                movingGif.style.transform = `rotate(${rotationAngle}deg)`;
+            }
+            document.addEventListener('keydown', function(event) {
+                const movementSpeed = 15;
+                const rotationSpeed = 5;
+
+                switch(event.key) {
+                    case 'ArrowLeft':
+                        if (arrow != "left") {
+                            if (headlightsON == true) {
+                                movingGif.src = "tile004 (1).png"
+                                arrow = "left";
+                            } else {
+                                movingGif.src = "tile001 (1).png"
+                                arrow = "left";
+
+                            }
+                        }
+                        if (posX >= 590) {
+                            posX -= movementSpeed;
+                            rotationAngle = -rotationSpeed;
+                        }
+                        break;
+                    case 'ArrowRight':
+                        if (arrow != "right") {
+                            if (headlightsON == true) {
+                                movingGif.src = "tile005 (1).png"
+                                arrow = "right";
+                            } else {
+                                movingGif.src = 'tile002 (1).png';
+                                arrow = "right";
+                            }
+                            
+                        }
+                        if (posX <= 920) {
+                            posX += movementSpeed;
+                            rotationAngle = rotationSpeed;
+                        }
+                        break;
+                    default: 
+                        movingGif.src = "tile000 (1).png"
+                        rotationAngle = 0;
+                        break;
+                        }
+                requestAnimationFrame(moveGif);
+            });
+
+            requestAnimationFrame(moveGif);
+        });
+        function spawnCoins() {
+            let speed = 3;
+            let specialSpeed = 6; 
+
+            let coin = document.createElement('img');
+            let x = Math.random() * (((window.innerWidth - (window.innerWidth * 0.20)) / 2) + (window.innerWidth * 0.20) - ((window.innerWidth - (window.innerWidth * 0.20)) / 2)) + ((window.innerWidth - (window.innerWidth * 0.20)) / 2);
+            
+            coin.src = 'coin_PNG36871.png';
+            coin.className = 'coin';
+            coin.style.left = x + 'px';
+            coin.style.top = '0px';
+            document.body.appendChild(coin);
+
+            spawnSpecial += 1
+
+            let coin2;
+            if (spawnSpecial == 5) {
+                spawnSpecial = 0;
+                coin2 = document.createElement('img');
+                coin2.src = 'coin_PNG36871342123123.png';
+                coin2.className = 'coin2';
+                coin2.style.left = x + 'px';
+                coin2.style.top = '0px';
+                document.body.appendChild(coin2);
+            }
+
+            function moveCoin() {
+                let currentTop = parseInt(coin.style.top);
+
+                if (currentTop < window.innerHeight) {
+                    coin.style.top = (currentTop + speed) + 'px';
+                    checkCollision(coin, movingGif);
+                    requestAnimationFrame(moveCoin);
+                } else {
+                    coin.remove();
+                }
+            }
+
+            function moveCoin2() {
+                let currentTop = parseInt(coin2.style.top);
+
+                if (currentTop < window.innerHeight) {
+                    coin2.style.top = (currentTop + specialSpeed) + 'px';
+                    checkCollision(coin2, movingGif);
+                    requestAnimationFrame(moveCoin2);
+                } else {
+                    coin2.remove();
+                }
+            }
+
+            requestAnimationFrame(moveCoin);
+
+            if (coin2) {
+                requestAnimationFrame(moveCoin2);
+            }
+        }
+        function checkCollision(coin, gif) {
+            let coinRect = coin.getBoundingClientRect();
+            let gifRect = gif.getBoundingClientRect();
+            if (coinRect.x < gifRect.x + gifRect.width &&coinRect.x + coinRect.width > gifRect.x &&coinRect.y < gifRect.y + gifRect.height &&coinRect.y + coinRect.height > gifRect.y) {
+                coin.remove();
+                if (spawnSpecial != 10) {
+                    score += 100
+                } else {
+                    score += 200
+                }
+                var heading = document.getElementById("scoreboard");
+                heading.innerText = "Points: " + score;
+        }
+    }
+
+        function moveBackgrounds() {
+            let background1 = document.getElementById('backround');
+            let background2 = document.getElementById('backround2');
+
+            y1 += 3;
+            y2 += 3;
+
+            if (y1 > maxHeight) {
+                y1 = -maxHeight;
+            }
+            if (y2 > maxHeight) {
+                y2 = -maxHeight;
+            }
+
+            background1.style.top = y1 + "px";
+            background2.style.top = y2 + "px";
+
+            requestAnimationFrame(moveBackgrounds);
+        }
+        requestAnimationFrame(moveBackgrounds);
+    </script>
+</body>
+</html>
