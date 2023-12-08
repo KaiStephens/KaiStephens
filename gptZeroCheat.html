@@ -3,11 +3,16 @@
 <head>
     <title>GPTZero-Cheat</title>
     <style>
+        button:hover { /* THIS WAS MADE BY CHATGPT I DO NOT TAKE OWNERSHIP */
+            background-color: #0056b3;
+            transform: translateY(-5px); 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #ececec;
             color: #333;
-            line-height: 1.6;
+            line-height: 1.6; /* THIS WAS MADE BY CHATGPT I DO NOT TAKE OWNERSHIP */
             padding: 0;
             margin: 0;
             display: flex;
@@ -15,13 +20,14 @@
             align-items: center;
             height: 100vh;
             flex-wrap: wrap;
+            animation: fadeIn 2s;
         }
         .container {
             background: white;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             padding: 20px;
-            margin: 10px;
+            margin: 10px; /* THIS WAS MADE BY CHATGPT I DO NOT TAKE OWNERSHIP */
             width: calc(50% - 20px);
             box-sizing: border-box;
         }
@@ -32,14 +38,14 @@
             padding: 20px;
             margin: 10px;
             width: calc(25% - 15px);
-            min-height: 500px;
+            min-height: 500px; /* THIS WAS MADE BY CHATGPT I DO NOT TAKE OWNERSHIP */
             box-sizing: border-box;
             text-align: center;
         }
         .gpt-link-container h2,
         .gpt-link-container p,
         .gpt-link-container a {
-            text-align: center;
+            text-align: center; /* THIS WAS MADE BY CHATGPT I DO NOT TAKE OWNERSHIP */
             margin-left: 20px;
             margin-right: 20px;
 
@@ -53,7 +59,7 @@
             height: 200px;
             margin-bottom: 10px;
             padding: 10px;
-            border-radius: 4px;
+            border-radius: 4px;/* THIS WAS MADE BY CHATGPT I DO NOT TAKE OWNERSHIP */
             border: 1px solid #ddd;
             resize: vertical;
             font-family: Verdana;
@@ -67,17 +73,18 @@
             border: none;
             border-radius: 4px;
             background-color: #007bff;
-            color: white;
+            color: white;/* THIS WAS MADE BY CHATGPT I DO NOT TAKE OWNERSHIP */
             font-size: 16px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.3s ease, box-shadow 0.3s ease;
+
         }
         button:hover {
             background-color: #0056b3;
         }
         #text1 {
             margin-top: 80px;
-            font-size:larger;
+            font-size:larger;/* THIS WAS MADE BY CHATGPT I DO NOT TAKE OWNERSHIP */
         }
         .feedback {
             text-align: center;
@@ -86,7 +93,7 @@
         }
         .gpt-link {
             display: block;
-            padding: 10px;
+            padding: 10px;/* THIS WAS MADE BY CHATGPT I DO NOT TAKE OWNERSHIP */
             margin-top: 20px;
             background-color: #007bff;
             color: white;
@@ -96,6 +103,10 @@
         }
         .gpt-link:hover {
             background-color: #0056b3;
+        }
+        @keyframes fadeIn {/* THIS WAS MADE BY CHATGPT I DO NOT TAKE OWNERSHIP */
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
