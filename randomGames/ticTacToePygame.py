@@ -1,10 +1,8 @@
 import pygame
 import sys
 
-# Initialize Pygame
 pygame.init()
 
-# Color Constants
 BG_COLOR = (28, 170, 156)
 LINE_COLOR = (23, 145, 135)
 COLOUR = (239, 231, 200)
@@ -14,10 +12,8 @@ screen = pygame.display.set_mode((300, 300))
 pygame.display.set_caption('Tic Tac Toe')
 screen.fill(BG_COLOR)
 
-# Board
 board = [[None] * 3 for _ in range(3)]
 
-# Functions
 def drawLines():
     # Horizontal
     pygame.draw.line(screen, LINE_COLOR, (0, 100), (300, 100), 15)
@@ -43,7 +39,6 @@ def availableSquare(row, col):
     return board[row][col] is None
 
 def checkGameOver():
-    # Check win
     for player in ['X', 'O']:
         # Vertical win
         for col in range(3):
@@ -66,7 +61,6 @@ def checkGameOver():
         for col in range(3):
             if board[row][col] is None:
                 return False, None
-            
     return True, None
 
 # Main loop
