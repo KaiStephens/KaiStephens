@@ -26,26 +26,26 @@
             let x = setInterval(function() {
                 let now = new Date().getTime();
                 let distance = countDownDate - now;
-				let hours 
-				let minutes
+			let hours 
+			let minutes
 				
-				// Hours
-				if (Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) == 0){
-					hours = ""
-				} else {
-					hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) + "h "
-				}
+			// Hours
+			if (Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) == 0){
+				hours = ""
+			} else {
+				hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) + "h "
+			}
 				
 				
-				// Minutes
-				if (Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)) == 0){
-					minutes = ""
-				} else {
-					minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)) + "m "
-				}
+			// Minutes
+			if (Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)) == 0){
+				minutes = ""
+			} else {
+				minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)) + "m "
+			}
 				
-				// Seconds
-				let seconds = Math.floor((distance % (1000 * 60)) / 1000) + "s ";
+			// Seconds
+			let seconds = Math.floor((distance % (1000 * 60)) / 1000) + "s ";
 				
                 document.getElementById("timeText").innerHTML = "Kai's schools ends in " + hours + minutes + seconds;
 
