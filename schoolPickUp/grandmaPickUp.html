@@ -36,11 +36,11 @@
                 let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                return { hours, minutes, seconds, distance }; // Return as an object
+                return { hours, minutes, seconds, distance };
             }
 
             let x = setInterval(function() {
-				// Example: {hours: 3, minutes: 8, seconds: 20, distance: 11300583}
+		// Example: {hours: 3, minutes: 8, seconds: 20, distance: 11300583}
                 let timeLeft = calculateTimeUntil(countDownDate);
 
                 if (timeLeft.distance > 0) {
@@ -55,7 +55,7 @@
                     document.getElementById("timeText").innerHTML = "Kai's School has already ended today";
                 }
 
-				let timeLeftTwo = calculateTimeUntil(countDownDate2);
+		let timeLeftTwo = calculateTimeUntil(countDownDate2);
 
                 if (timeLeftTwo.distance > 0) {
                     let hoursText = timeLeftTwo.hours > 0 ? timeLeftTwo.hours + "h " : "";
@@ -69,12 +69,6 @@
                     document.getElementById("pickUpText").innerHTML = "";
                 }
             }, 1000);
-
-
-
-			// let countDownDate2 = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 20, 31, 54).getTime();
-			// document.getElementById("pickUpText").innerHTML = "You need to leave your house in " + hours + (Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)) - 13)  + "m " + (Math.floor((distance % (1000 * 60)) / 1000) - 18) + "s ";
-			//document.getElementById("pickUpText").innerHTML = "";
         </script>
     </body>
 </html>
