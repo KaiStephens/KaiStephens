@@ -1,51 +1,43 @@
 <!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <html>
 	<head>
 		<title>Kai's end of school</title>
 		<style>
+			body, html {
+				height: 100%;
+				margin: 0;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
 			#timeText {
-				position: absolute;
-				display: block;
-				left: 40%;
-				top: 40%;
-        
+				position: relative;
 			}
 		</style>
 	</head>
 	<body>
 		<p id="timeText"></p></body>
 	<script>
-		
-		let d1 = new Date();
-		let currentYear = d1.getFullYear();
-		let d2 = new Date();
-		let currentMonth = d2.getMonth() + 1;
-		let d3 = new Date();
-		let currentDay = d3.getDate();
+		let d = new Date();
+            let countDownDate = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 14, 45, 3).getTime();
 
-		// "takes 13 minutes to get from my grandmas house to mine"
-		countDownDate = new Date(currentMonth + " " + currentDay + ", " + currentYear + " 14:45:03").getTime();
+            let x = setInterval(function() {
+                let now = new Date().getTime();
+                let distance = countDownDate - now;
 
-		
-		let x = setInterval(function() {
-			let now = new Date().getTime();
-			let distance = countDownDate - now;
-				
-			let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-			let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-			let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-		
-			document.getElementById("timeText").innerHTML = hours + "h "
-			+ minutes + "m " + seconds + "s ";
-		
-			if (distance < 0) {
-				clearInterval(x);
-				document.getElementById("timeText").innerHTML = "Kai's School has already ended today";
-			}
-			
+                let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-		}, 1000);
+                document.getElementById("timeText").innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
+
+                if (distance < 0) {
+                    clearInterval(x);
+                    document.getElementById("timeText").innerHTML = "Kai's School has already ended today";
+                }
+            }, 1000);
 		
 	</script>
 </html>
