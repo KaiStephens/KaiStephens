@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DINKS Market Segment Analysis</title>
     <style>
+        /* Variables */
         :root {
             --primary-color: #6200EA;
             --secondary-color: #03DAC6;
@@ -14,13 +15,14 @@
             --text-color: #FFFFFF;
             --text-secondary: #B0BEC5;
         }
-        
+
+        /* Global Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Roboto', sans-serif;
             line-height: 1.6;
@@ -28,7 +30,7 @@
             background-color: var(--background-color);
             overflow-x: hidden;
         }
-        
+
         .container {
             width: 90%;
             max-width: 1200px;
@@ -36,7 +38,8 @@
             overflow: hidden;
             padding: 0 20px;
         }
-        
+
+        /* Header Styles */
         header {
             background-color: rgba(98, 0, 234, 0.8);
             padding: 20px 0;
@@ -46,38 +49,39 @@
             z-index: 1000;
             transition: all 0.3s ease;
         }
-        
+
         header.sticky {
             padding: 10px 0;
             background-color: rgba(98, 0, 234, 0.95);
         }
-        
+
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        
+
         nav ul {
             display: flex;
             list-style: none;
         }
-        
+
         nav ul li {
             margin-left: 30px;
         }
-        
+
         nav a {
             color: var(--text-color);
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s ease;
         }
-        
+
         nav a:hover {
             color: var(--secondary-color);
         }
-        
+
+        /* Showcase Styles */
         #showcase {
             height: 75vh;
             display: flex;
@@ -85,8 +89,9 @@
             justify-content: center;
             text-align: center;
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://source.unsplash.com/1600x900/?couple,urban') no-repeat center center/cover;
+            margin-top: 60px;
         }
-        
+
         #showcase h1 {
             font-size: 4rem;
             margin-bottom: 20px;
@@ -94,7 +99,7 @@
             transform: translateY(50px);
             animation: fadeInUp 1s ease forwards;
         }
-        
+
         #showcase p {
             font-size: 1.5rem;
             margin-bottom: 30px;
@@ -102,14 +107,15 @@
             transform: translateY(50px);
             animation: fadeInUp 1s ease forwards 0.5s;
         }
-        
+
         @keyframes fadeInUp {
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        
+
+        /* Button Styles */
         .btn {
             display: inline-block;
             background: var(--secondary-color);
@@ -125,23 +131,24 @@
             transform: translateY(50px);
             animation: fadeInUp 1s ease forwards 1s;
         }
-        
+
         .btn:hover {
             background: var(--accent-color);
             color: var(--text-color);
         }
-        
+
+        /* Profile Styles */
         #segment-profile {
             padding: 80px 0;
             background-color: var(--surface-color);
         }
-        
+
         .profile-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
         }
-        
+
         .profile-card {
             background-color: rgba(255, 255, 255, 0.05);
             border-radius: 10px;
@@ -150,33 +157,33 @@
             opacity: 0;
             transform: translateY(50px);
         }
-        
+
         .profile-card.show {
             opacity: 1;
             transform: translateY(0);
         }
-        
+
         .profile-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
-        
+
         .profile-card h3 {
             color: var(--secondary-color);
             margin-bottom: 20px;
             font-size: 1.5rem;
         }
-        
+
         .profile-card ul {
             list-style: none;
         }
-        
+
         .profile-card ul li {
             margin-bottom: 10px;
             position: relative;
             padding-left: 25px;
         }
-        
+
         .profile-card ul li::before {
             content: '•';
             color: var(--accent-color);
@@ -185,18 +192,19 @@
             top: 0;
             font-size: 1.2rem;
         }
-        
+
+        /* Products Styles */
         #products {
             padding: 80px 0;
             background-color: var(--background-color);
         }
-        
+
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
-        
+
         .product-card {
             background-color: var(--surface-color);
             border-radius: 10px;
@@ -205,65 +213,142 @@
             opacity: 0;
             transform: scale(0.9);
         }
-        
+
         .product-card.show {
             opacity: 1;
             transform: scale(1);
         }
-        
+
         .product-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
         }
-        
+
         .product-card img {
             width: 100%;
             height: 200px;
             object-fit: cover;
         }
-        
+
         .product-info {
             padding: 20px;
         }
-        
+
         .product-info h4 {
             color: var(--secondary-color);
             margin-bottom: 10px;
             font-size: 1.3rem;
         }
-        
+
         .product-info p {
             color: var(--text-secondary);
             font-size: 0.9rem;
         }
-        
+
+        /* Bundle Styles */
+        #bundle {
+            padding: 80px 0;
+            background-color: var(--surface-color);
+        }
+
+        .bundle-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .bundle-container.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .sold-out-banner {
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background: var(--accent-color);
+            color: white;
+            padding: 8px 40px;
+            transform: rotate(45deg);
+            font-weight: bold;
+            z-index: 1;
+        }
+
+        .bundle-price {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin: 20px 0;
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+
+        .bundle-btn {
+            display: inline-block;
+            background: #666;
+            color: var(--text-secondary);
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2 rem;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .bundle-features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .bundle-feature {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 25px;
+            border-radius: 8px;
+            flex: 0 1 calc(33.333% - 20px);
+            min-width: 200px;
+        }
+
+        /* Footer Styles */
         footer {
             background-color: var(--surface-color);
             color: var(--text-secondary);
             text-align: center;
             padding: 20px 0;
         }
-        
+
         h2 {
             text-align: center;
             margin-bottom: 40px;
             font-size: 2.5rem;
             color: var(--secondary-color);
         }
-        
+
+        /* Media Queries */
         @media(max-width: 768px) {
             nav ul {
                 display: none;
             }
-            
+
             #showcase h1 {
                 font-size: 3rem;
             }
-            
+
             #showcase p {
                 font-size: 1.2rem;
             }
-            
+
             .btn {
                 font-size: 1rem;
                 padding: 10px 20px;
@@ -337,7 +422,7 @@
             </div>
         </div>
     </section>
-    
+
     <section id="bundle">
         <div class="container">
             <h2>Ultimate DINKS Bundle</h2>
@@ -353,7 +438,7 @@
                     </div>
                     <div class="bundle-feature">
                         <h4>Fine Dining</h4>
-                        <p>exclusive restaurant gift card</p>
+                        <p >exclusive restaurant gift card</p>
                     </div>
                     <div class="bundle-feature">
                         <h4>Travel Package</h4>
@@ -368,8 +453,8 @@
                         <p>Premium outdoor equipment set</p>
                     </div>
                     <div class="bundle-feature">
-                        <h4>Wellness Package</h4>
-                        <p>1-year premium gym membership</p>
+                        <h4>And more!</h4>
+                        <p>Gym membership, Outdoor Adventure Gear, etc.</p>
                     </div>
                 </div>
                 <button class="bundle-btn" disabled>Currently Unavailable</button>
@@ -377,7 +462,6 @@
             </div>
         </div>
     </section>
-    
 
     <section id="products">
         <div class="container">
@@ -428,8 +512,15 @@
                 <div class="product-card">
                     <img src="/api/placeholder/400/300" alt=" ">
                     <div class="product-info">
-                        <h4>Fitness & Wellness</h4>
-                        <p>Premium gym memberships and high-end fitness products.</p>
+                        <h4>Phone</h4>
+                        <p>Newest iPhone 16 1tb storage.</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="/api/placeholder/400/300" alt=" ">
+                    <div class="product-info">
+                        <h4>Luxury Watch</h4>
+                        <p>Includes Rolex Submariner with black band</p>
                     </div>
                 </div>
                 <div class="product-card">
@@ -442,8 +533,22 @@
                 <div class="product-card">
                     <img src="/api/placeholder/400/300" alt=" ">
                     <div class="product-info">
-                        <h4>Fitness & Wellness</h4>
-                        <p>Premium gym memberships and high-end fitness products.</p>
+                        <h4>Reproductive Health products</h4>
+                        <p>Product's to increase the change of fertility.</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="/api/placeholder/400/300" alt=" ">
+                    <div class="product-info">
+                        <h4>Expensive liquor and high end alcohol.</h4>
+                        <p>Top bottled and brands like Richard Hennessy Cognac, Louis XIII Cognac.</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="/api/placeholder/400/300" alt=" ">
+                    <div class="product-info">
+                        <h4>Assortment of Designer clothes</h4>
+                        <p>Chose styles of designer clothes from popular brands like Gucci, Prada, Louis Vuitton</p>
                     </div>
                 </div>
             </div>
@@ -453,280 +558,6 @@
     <footer>
         <p>DINKS Market Segment Analysis &copy; 2024</p>
     </footer>
-
-    <script>
-        // Sticky Header
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            header.classList.toggle('sticky', window.scrollY > 0);
-        });
-
-        // Scroll Animations
-        function isInViewport(element) {
-            const rect = element.getBoundingClientRect();
-            return (
-                rect.top >= 0 &&
-                rect.left >= 0 &&
-                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-            );
-        }
-
-        function handleScrollAnimations() {
-            const profileCards = document.querySelectorAll('.profile-card');
-            const productCards = document.querySelectorAll('.product-card');
-
-            profileCards.forEach((card, index) => {
-                if (isInViewport(card)) {
-                    setTimeout(() => {
-                        card.classList.add('show');
-                    }, index * 100);
-                }
-            });
-
-            productCards.forEach((card, index) => {
-                if (isInViewport(card)) {
-                    setTimeout(() => {
-                        card.classList.add('show');
-                    }, index * 100);
-                }
-            });
-        }
-
-        window.addEventListener('scroll', handleScrollAnimations);
-        window.addEventListener('load', handleScrollAnimations);
-
-        // Smooth Scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
-</body>
-</html>
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DINKS Market Segment Analysis</title>
-    <style>
-        :root {
-            --primary-color: #6200EA;
-            --secondary-color: #03DAC6;
-            --accent-color: #FF4081;
-            --background-color: #121212;
-            --surface-color: #1E1E1E;
-            --text-color: #FFFFFF;
-            --text-secondary: #B0BEC5;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Roboto', sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--background-color);
-            overflow-x: hidden;
-        }
-        
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: auto;
-            overflow: hidden;
-            padding: 0 20px;
-        }
-        
-        header {
-            background-color: rgba(98, 0, 234, 0.8);
-            padding: 20px 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-        
-        header.sticky {
-            padding: 10px 0;
-            background-color: rgba(98, 0, 234, 0.95);
-        }
-        
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        nav ul li {
-            margin-left: 30px;
-        }
-        
-        nav a {
-            color: var(--text-color);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-        
-        nav a:hover {
-            color: var(--secondary-color);
-        }
-        
-        #showcase {
-            height: 75vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://source.unsplash.com/1600x900/?couple,urban') no-repeat center center/cover;
-            margin-top: 60px;
-        }
-        
-        #showcase h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            opacity: 0;
-            transform: translateY(50px);
-            animation: fadeInUp 1s ease forwards;
-        }
-        
-        #showcase p {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            opacity: 0;
-            transform: translateY(50px);
-            animation: fadeInUp 1s ease forwards 0.5s;
-        }
-        
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .btn {
-            display: inline-block;
-            background: var(--secondary-color);
-            color: var(--background-color);
-            padding: 12px 30px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.2rem;
-            font-weight: 500;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            opacity: 0;
-            transform: translateY(50px);
-            animation: fadeInUp 1s ease forwards 1s;
-        }
-        
-        .btn:hover {
-            background: var(--accent-color);
-            color: var(--text-color);
-        }
-
-        /* Previous styles remain unchanged */
-        
-        /* Bundle section styles */
-        #bundle {
-            padding: 80px 0;
-            background-color: var(--surface-color);
-        }
-        
-        .bundle-container {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 40px;
-            position: relative;
-            overflow: hidden;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease;
-        }
-        
-        .bundle-container.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .sold-out-banner {
-            position: absolute;
-            top: 20px;
-            right: -35px;
-            background: var(--accent-color);
-            color: white;
-            padding: 8px 40px;
-            transform: rotate(45deg);
-            font-weight: bold;
-            z-index: 1;
-        }
-        
-        .bundle-price {
-            font-size: 2.5rem;
-            color: var(--secondary-color);
-            margin: 20px 0;
-            text-decoration: line-through;
-            opacity: 0.7;
-        }
-        
-        .bundle-btn {
-            display: inline-block;
-            background: #666;
-            color: var(--text-secondary);
-            padding: 12px 30px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.2rem;
-            font-weight: 500;
-            text-decoration: none;
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
-        
-        .bundle-features {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            margin: 30px 0;
-        }
-        
-        .bundle-feature {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 15px 25px;
-            border-radius: 8px;
-            flex: 0 1 calc(33.333% - 20px);
-            min-width: 200px;
-        }
-
-        /* Rest of your existing styles */
-    </style>
-</head>
-<body>
-    <header>
 
     <script>
         // Sticky Header
