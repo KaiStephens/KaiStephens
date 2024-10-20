@@ -1,1 +1,202 @@
-kai stephens
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modified BALKAN family treeJS Example with Top-Left Gray Zoom Buttons</title>
+    <script src="https://balkan.app/js/FamilyTree.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #tree {
+            width: 100%;
+            height: 100vh;
+        }
+        #controls-container {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+        }
+        #custom-buttons {
+            display: flex;
+            align-items: center;
+            margin-right: 10px;
+        }
+        #custom-buttons button {
+            background-color: #808080;
+            color: #fff;
+            border: none;
+            padding: 7px 10px;
+            margin-right: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            outline: none;
+        }
+        #custom-buttons button:hover {
+            background-color: #666666;
+        }
+        #search-bar {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="tree"></div>
+    <div id="controls-container">
+        <div id="custom-buttons">
+            <button id="zoom-out">-</button>
+            <button id="zoom-in">+</button>
+            <button id="fit">Fit</button>
+        </div>
+        <div id="search-bar"></div>
+    </div>
+    <script>
+        function getOptions() {
+            const searchParams = new URLSearchParams(window.location.search);
+            var fit = searchParams.get('fit');
+            var enableSearch = true;
+            var scaleInitial = 1;
+            if (fit == 'yes') {
+                enableSearch = false;
+                scaleInitial = FamilyTree.match.boundary;
+            }
+            return {enableSearch, scaleInitial};
+        }
+
+        var options = getOptions();
+        let [cx, cy] = [0, 0];
+        let plus =
+            `<circle cx="${cx}" cy="${cy}" r="15" fill="#6D8FB2" stroke="#fff" stroke-width="1"></circle>
+             <line x1="-11" y1="0" x2="11" y2="0" stroke-width="1" stroke="#fff"></line>
+             <line x1="0" y1="-11" x2="0" y2="11" stroke-width="1" stroke="#fff"></line>`;
+        let minus =
+            `<circle cx="${cx}" cy="${cy}" r="15" fill="#6D8FB2" stroke="#fff" stroke-width="1"></circle>
+             <line x1="-11" y1="0" x2="11" y2="0" stroke-width="1" stroke="#fff"></line>`;
+
+        FamilyTree.templates.myTemplate = Object.assign({}, FamilyTree.templates.tommy);
+        FamilyTree.templates.myTemplate.size = [250, 100];
+        FamilyTree.templates.myTemplate.node = '<rect x="0" y="0" height="{h}" width="{w}" stroke-width="1" fill="white" stroke="#6D8FB2" rx="7" ry="7"></rect>';
+        FamilyTree.templates.myTemplate.field_0 = '<text style="font-size: 16px;" fill="#19447E" x="125" y="45" text-anchor="middle">{val}</text>';
+        FamilyTree.templates.myTemplate.field_1 = '<text style="font-size: 14px;" fill="#19447E" x="125" y="70" text-anchor="middle">{val}</text>';
+        FamilyTree.templates.myTemplate.link = '<path stroke-linejoin="round" stroke="#6D8FB2" stroke-width="1px" fill="none" d="{edge}" />';
+        FamilyTree.templates.myTemplate.plus = plus;
+        FamilyTree.templates.myTemplate.minus = minus;
+
+        let family = new FamilyTree(document.getElementById("tree"), {
+            orientation: FamilyTree.orientation.left,
+            scaleInitial: options.scaleInitial,
+            mouseScrool: FamilyTree.action.zoom,
+            template: "myTemplate",
+            partnerChildrenSplitSeparation: 40,
+            levelSeparation: 80,
+            nodeBinding: {
+                field_0: "name",
+                field_1: "fName"
+            },
+            sticky: true,
+            enableSearch: options.enableSearch,
+            searchFieldsWeight: {
+                "name": 100,
+                "fName": 100
+            }
+        });
+
+        family.onInit(() => {
+            family.collapse(1, [6, 9, 10]);
+            if (options.enableSearch) {
+                family.searchUI.init(document.getElementById("search-bar"));
+            }
+        });
+
+        family.on('render-link', function (sender, args) {
+            if (args.cnode.ppid != undefined) {
+                cx = args.p.xa + 12;
+                cy = args.p.ya + 9;
+                args.html += `<use data-ctrl-ec-id="${args.node.id}" xlink:href="#minus" x="${cx}" y="${cy}"/>`;
+            }
+        });
+        family.load([
+            { id: 1, name: "Fiachra", fName: "Follsnathach, a quo the Hy-Fiachrach" },
+            { id: 2, fid: 1, name: "Fiachra", fName: "Follsnathach, a quo the Hy-Fiachrach" },
+            { id: 3, fid: 2, name: "Dathi", fName: "M. I. 407" },
+            { id: 4, fid: 3, name: "Oilioll", fName: "Molt, M. I., d. 483" },
+
+        ]);
+
+        family.load([
+        { 
+            id: 1, 
+            name: "Fiachra", 
+            fName: "Follsnathach",
+            Year: "N/A"
+        },
+        { 
+            id: 2, 
+            pids: [], 
+            fid: 1, 
+            name: "Daithi",
+            fName: "M",
+            Year: "407"
+        },
+        { 
+            id: 3, 
+            pids: [], 
+            fid: 2, 
+            name: "Olilioll",
+            fName: "Molt",
+            Year: "483"
+        },
+        { 
+            id: 4, 
+            pids: [], 
+            fid: 2, 
+            name: "Fiachra",
+            fName: "Ealgash",
+            Year: "N/A"
+        },
+        { 
+            id: 5, 
+            pids: [], 
+            fid: 4, 
+            name: "Mnoldubh",
+            fName: "Mnaldiun",
+            Year: "N/A"
+        },
+        { 
+            id: 6, 
+            pids: [], 
+            fid: 3, 
+            name: "Ceallach",
+            fName: "N/A",
+            Year: "N/A"
+        }
+    ]);
+
+
+        window.addEventListener('resize', function() {
+            family.fit();
+        });
+
+        // Zoom controls
+        document.getElementById('zoom-in').addEventListener('click', function() {
+            family.zoom(1.2, null, null, 250);
+        });
+
+        document.getElementById('zoom-out').addEventListener('click', function() {
+            family.zoom(0.8, null, null, 250);
+        });
+
+        document.getElementById('fit').addEventListener('click', function() {
+            family.fit();
+        });
+    </script>
+</body>
+</html>
