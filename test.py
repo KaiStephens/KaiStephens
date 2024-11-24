@@ -1,9 +1,23 @@
+import requests
+
+url = 'http://api.openweathermap.org/data/2.5/weather?q={}&appid=d57912ef6c4d5e39679d924ba2253cb8&units=metric'.format("Newmarket")
+
+res = requests.get(url)
+data = res.json()
+
+description = data['weather'][0]['description']
+temp = data['main']['temp']
+
+print(f"The temperature is {temp}, there are currently {description}")
+
+
 import time
 import numpy as np
 import sounddevice as sd
 from piper.voice import PiperVoice
 import schedule
 import threading
+import time
 
 # --- PIPER Configuration ---
 
@@ -50,8 +64,11 @@ def play_piper_text(text):
 
 def say_good_morning():
     """Uses Piper TTS to say 'Good morning'."""
-    text = "Good morning, sir. All systems are operational. Monitor and lights turning on."
+    text = "Good morning, sir. All systems are operational. Monitor and lights turning on. "
+    text1 = f"The temperature is {temp}, there are currently {description}"
     play_piper_text(text)
+    time.sleep(2)
+    play_piper_text(text1)
 
 # --- Schedule Configuration ---
 
