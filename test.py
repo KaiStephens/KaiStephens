@@ -22,7 +22,7 @@ def say_good_morning():
     """Uses TTS to say 'Good morning' with a Jarvis-like voice."""
     engine = configure_tts_engine()
     engine.say("Good morning, sir... All systems are operational.")
-    engine.say("Light turning on")
+    engine.say("Monitor and Light turning on")
     engine.runAndWait()
 say_good_morning()
 # Schedule the job for 7:00 AM
