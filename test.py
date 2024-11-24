@@ -1,6 +1,6 @@
 import requests
 
-url = 'http://api.openweathermap.org/data/2.5/weather?q={}&appid=d57912ef6c4d5e39679d924ba2253cb8&units=metric'.format("Newmarket")
+url = 'http://api.openweathermap.org/data/2.5/weather?q={}&appid=d57912ef6c4d5e3a2253cb8&units=metric'.format("Newmarket")
 
 res = requests.get(url)
 data = res.json()
