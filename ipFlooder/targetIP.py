@@ -5,7 +5,7 @@ import time
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)  
 bytes_data = random._urandom(1024)  
 
-ip = input("Enter your target IP: \n >>>")
+ip = input("Enter your target IP:\n>>>")
 port = 5000
 sent = 0
 
