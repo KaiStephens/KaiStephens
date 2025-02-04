@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>About Kai Stephens</title>
+  <!-- Using Montserrat for a modern, clean look -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     /* Reset & Base Styles */
     * {
@@ -12,43 +14,79 @@
       box-sizing: border-box;
     }
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
       line-height: 1.6;
-      background: #121212;
-      color: #eee;
+      background: #0d0d0d;
+      color: #e0e0e0;
       overflow-x: hidden;
     }
     a {
       color: #1abc9c;
       text-decoration: none;
+      transition: color 0.3s;
     }
     a:hover {
+      color: #f39c12;
       text-decoration: underline;
     }
-    /* Header with Animated Gradient */
+
+    /* Header with Animated Gradient and Shine */
     header {
-      padding: 40px 20px;
+      padding: 60px 20px;
       text-align: center;
-      background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #203a43);
-      background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
+      background: linear-gradient(135deg, #1d2b64, #f8cdda);
+      animation: gradientShift 10s ease infinite;
+      position: relative;
+      overflow: hidden;
     }
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    @keyframes gradientShift {
+      0% { filter: hue-rotate(0deg); }
+      50% { filter: hue-rotate(180deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
+    header::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -50%;
+      width: 200%;
+      height: 100%;
+      background: rgba(0,0,0,0.1);
+      transform: skewX(-25deg);
+      animation: shine 2s infinite;
+    }
+    @keyframes shine {
+      0% { left: -100%; }
+      50% { left: 100%; }
+      100% { left: 100%; }
     }
     header h1 {
-      font-size: 3em;
+      font-size: 3.5em;
       margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+      animation: popIn 1s ease-out;
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
     }
     header p {
-      font-size: 1.1em;
+      font-size: 0.9em;
+      position: relative;
+      z-index: 1;
+      animation: fadeIn 2s ease-out;
     }
-    /* Navigation Bar */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Navigation */
     nav {
-      background: #1f1f1f;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      background: #151515;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.7);
     }
     nav ul {
       list-style: none;
@@ -61,23 +99,23 @@
       margin: 0 15px;
     }
     nav ul li a {
-      color: #eee;
-      font-weight: bold;
-      transition: transform 0.2s, color 0.2s;
+      font-weight: 600;
+      transition: transform 0.3s, color 0.3s;
     }
     nav ul li a:hover {
-      transform: scale(1.1);
-      color: #1abc9c;
+      transform: translateY(-3px);
+      color: #f39c12;
     }
-    /* Container & Section Styles */
+
+    /* Main Container & Sections */
     .container {
       width: 90%;
       max-width: 1000px;
       margin: 40px auto;
       padding: 20px;
-      background: #1e1e1e;
+      background: #1c1c1c;
       border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
     }
     section {
       margin-bottom: 50px;
@@ -85,7 +123,7 @@
       border-bottom: 1px solid #333;
       opacity: 0;
       transform: translateY(20px);
-      transition: opacity 1s ease-out, transform 1s ease-out;
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
     }
     section.visible {
       opacity: 1;
@@ -96,10 +134,16 @@
       padding-bottom: 5px;
       border-bottom: 2px solid #1abc9c;
       font-size: 2em;
+      animation: slideIn 0.8s ease-out;
+    }
+    @keyframes slideIn {
+      from { transform: translateX(-50px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
     }
     section h3 {
       margin: 15px 0 5px;
       color: #1abc9c;
+      font-size: 1.2em;
     }
     ul {
       margin-left: 20px;
@@ -108,7 +152,8 @@
     li {
       margin-bottom: 8px;
     }
-    /* Projects Section with Hover Animation */
+
+    /* Projects Section with Enhanced Animation */
     #projects ul {
       list-style: none;
       padding: 0;
@@ -118,21 +163,41 @@
       background: #2a2a2a;
       padding: 15px;
       border-radius: 6px;
-      transition: transform 0.3s, background 0.3s;
+      transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
     }
     #projects li:hover {
       transform: translateX(10px);
       background: #1abc9c;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
     }
+    #projects li::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.15), transparent);
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+    #projects li:hover::before {
+      opacity: 1;
+    }
+
     /* Footer */
     footer {
-      background: #1f1f1f;
+      background: #151515;
       text-align: center;
       padding: 20px;
       margin-top: 20px;
-      font-size: 0.9em;
+      font-size: 0.8em;
+      color: #aaa;
     }
-    /* Smooth Scroll Behavior */
+
+    /* Smooth Scroll */
     html {
       scroll-behavior: smooth;
     }
@@ -165,13 +230,13 @@
     </ul>
   </nav>
 
-  <!-- Main Content -->
+  <!-- Main Content Container -->
   <div class="container">
     <!-- About Me Section -->
     <section id="about">
       <h2>About Me</h2>
       <p>
-        Driven and technically skilled individual seeking an opportunity to apply my expertise in programming, computers, and communication skills. Passionate about technology, learning, and efficiency—and committed to fostering community spirit through active socialization, collaborative teamwork, and local initiatives.
+        Driven and technically skilled individual seeking opportunities to apply my expertise in programming, computers, and communication skills. Passionate about technology, learning, and efficiency—and dedicated to fostering community spirit through teamwork and local initiatives.
       </p>
     </section>
 
@@ -182,7 +247,7 @@
       <p>Newmarket, ON</p>
       <ul>
         <li>Working towards OSSD.</li>
-        <li>Received Grade 9 English award after achieving 100% in the course.</li>
+        <li>Received Grade 9 English award for achieving 100% in the course.</li>
         <li>Active in clubs: coding club, robotics club, and community outreach (tutoring peers).</li>
         <li>Participated in competitions such as the Waterloo Coding Competition.</li>
         <li>
@@ -205,8 +270,8 @@
       <p>Newmarket, ON</p>
       <ul>
         <li>Developed and maintained software tools to support internal operations.</li>
-        <li>Collaborated with a cross-functional team to enhance project outcomes.</li>
-        <li>Participated in team-building activities and company-wide social events.</li>
+        <li>Collaborated with cross-functional teams to enhance project outcomes.</li>
+        <li>Participated in team-building activities and company events.</li>
         <li>Gained practical experience in coding best practices, version control, and testing.</li>
       </ul>
       <h3>Assistant Intern – Studio Forma Interior Design Inc (Spring 2024)</h3>
@@ -245,7 +310,7 @@
     <section id="interests">
       <h2>Interests &amp; Hobbies</h2>
       <p>
-        Solving coding and robotics challenges, rock climbing, building robots, hosting servers, 3D printing, networking, Cloudflare services, and engaging in local community events and clubs (chess, coding, robotics).
+        Solving coding and robotics challenges, rock climbing, building robots, hosting servers, 3D printing, networking, Cloudflare services, and engaging in community events and clubs (chess, coding, robotics).
       </p>
     </section>
 
@@ -291,11 +356,11 @@
     <p>&copy; 2025 Kai Stephens. All rights reserved.</p>
   </footer>
 
-  <!-- JavaScript: Fade-in Animation on Scroll -->
+  <!-- JavaScript: Intersection Observer for Section Animations -->
   <script>
     const sections = document.querySelectorAll('section');
     const options = {
-      threshold: 0.1
+      threshold: 0.2
     };
 
     const observer = new IntersectionObserver((entries, observer) => {
