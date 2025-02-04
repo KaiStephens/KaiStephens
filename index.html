@@ -1,1 +1,315 @@
-kaios
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Kai Stephens</title>
+  <style>
+    /* Reset & Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      background: #121212;
+      color: #eee;
+      overflow-x: hidden;
+    }
+    a {
+      color: #1abc9c;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    /* Header with Animated Gradient */
+    header {
+      padding: 40px 20px;
+      text-align: center;
+      background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #203a43);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+    }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    header h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 1.1em;
+    }
+    /* Navigation Bar */
+    nav {
+      background: #1f1f1f;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 10px 0;
+    }
+    nav ul li {
+      margin: 0 15px;
+    }
+    nav ul li a {
+      color: #eee;
+      font-weight: bold;
+      transition: transform 0.2s, color 0.2s;
+    }
+    nav ul li a:hover {
+      transform: scale(1.1);
+      color: #1abc9c;
+    }
+    /* Container & Section Styles */
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #1e1e1e;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+    section {
+      margin-bottom: 50px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #333;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    section h2 {
+      margin-bottom: 15px;
+      padding-bottom: 5px;
+      border-bottom: 2px solid #1abc9c;
+      font-size: 2em;
+    }
+    section h3 {
+      margin: 15px 0 5px;
+      color: #1abc9c;
+    }
+    ul {
+      margin-left: 20px;
+      list-style: disc;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    /* Projects Section with Hover Animation */
+    #projects ul {
+      list-style: none;
+      padding: 0;
+    }
+    #projects li {
+      margin: 15px 0;
+      background: #2a2a2a;
+      padding: 15px;
+      border-radius: 6px;
+      transition: transform 0.3s, background 0.3s;
+    }
+    #projects li:hover {
+      transform: translateX(10px);
+      background: #1abc9c;
+    }
+    /* Footer */
+    footer {
+      background: #1f1f1f;
+      text-align: center;
+      padding: 20px;
+      margin-top: 20px;
+      font-size: 0.9em;
+    }
+    /* Smooth Scroll Behavior */
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <h1>Kai Stephens</h1>
+    <p>
+      Mobile: 289-552-2524 | Email: <a href="mailto:kaistephens208@gmail.com">kaistephens208@gmail.com</a>
+    </p>
+    <p>
+      Website: <a href="http://kaios.ca" target="_blank">kaios.ca</a> |
+      GitHub: <a href="https://github.com/KaiStephens" target="_blank">github.com/KaiStephens</a>
+    </p>
+  </header>
+
+  <!-- Navigation -->
+  <nav>
+    <ul>
+      <li><a href="#about">About Me</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#achievements">Achievements</a></li>
+      <li><a href="#community">Community</a></li>
+      <li><a href="#interests">Interests</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container">
+    <!-- About Me Section -->
+    <section id="about">
+      <h2>About Me</h2>
+      <p>
+        Driven and technically skilled individual seeking an opportunity to apply my expertise in programming, computers, and communication skills. Passionate about technology, learning, and efficiency—and committed to fostering community spirit through active socialization, collaborative teamwork, and local initiatives.
+      </p>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education">
+      <h2>Education</h2>
+      <h3>Sir William Mulock S.S. – Grade 11 (2022–Present)</h3>
+      <p>Newmarket, ON</p>
+      <ul>
+        <li>Working towards OSSD.</li>
+        <li>Received Grade 9 English award after achieving 100% in the course.</li>
+        <li>Active in clubs: coding club, robotics club, and community outreach (tutoring peers).</li>
+        <li>Participated in competitions such as the Waterloo Coding Competition.</li>
+        <li>
+          Course Achievements:
+          <ul>
+            <li>Exploring Technologies (99%)</li>
+            <li>Digital Technology and Innovations in the Changing World (100%)</li>
+            <li>Computer Technology (Grades 9–11: 100%)</li>
+            <li>Computer Science (Grades 9–11: 100%)</li>
+            <li>English (Grades 9–10: 100%)</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+      <h2>Experience</h2>
+      <h3>Co-op Software Developer – Treefrog Inc (Winter 2025)</h3>
+      <p>Newmarket, ON</p>
+      <ul>
+        <li>Developed and maintained software tools to support internal operations.</li>
+        <li>Collaborated with a cross-functional team to enhance project outcomes.</li>
+        <li>Participated in team-building activities and company-wide social events.</li>
+        <li>Gained practical experience in coding best practices, version control, and testing.</li>
+      </ul>
+      <h3>Assistant Intern – Studio Forma Interior Design Inc (Spring 2024)</h3>
+      <p>Newmarket, ON</p>
+      <ul>
+        <li>Assisted the design team with digital solutions and software integrations.</li>
+        <li>Supported the automation of online services to streamline workflow.</li>
+        <li>Contributed to developing tools to optimize interior design operations.</li>
+        <li>Engaged with colleagues and clients during community events.</li>
+      </ul>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements">
+      <h2>Achievements</h2>
+      <ul>
+        <li><strong>Honour Roll:</strong> Achieved Honour Roll in Grades 9 and 10.</li>
+        <li><strong>English Award:</strong> Received a 100% achievement award in English (2023).</li>
+        <li><strong>Competition:</strong> 2nd place in the Waterloo Computing Competition.</li>
+        <li><strong>Certification:</strong> Completed Customer Service &amp; Leadership SHSM Certification at TRCA.</li>
+      </ul>
+    </section>
+
+    <!-- Community Involvement Section -->
+    <section id="community">
+      <h2>Community Involvement</h2>
+      <ul>
+        <li>Volunteered at local tech meet-ups and business start-up bootcamps (Y2 Entrepreneurship Labs), teaching programming basics.</li>
+        <li>Organized school events and collaborated on creating the school website with the Technology teacher.</li>
+        <li>Provided tutoring support in coding, science, and math.</li>
+        <li>Participated in business conferences and tech meet-ups to exchange ideas.</li>
+      </ul>
+    </section>
+
+    <!-- Interests & Hobbies Section -->
+    <section id="interests">
+      <h2>Interests &amp; Hobbies</h2>
+      <p>
+        Solving coding and robotics challenges, rock climbing, building robots, hosting servers, 3D printing, networking, Cloudflare services, and engaging in local community events and clubs (chess, coding, robotics).
+      </p>
+    </section>
+
+    <!-- Computer Skills Section -->
+    <section id="skills">
+      <h2>Computer Skills</h2>
+      <h3>Programming</h3>
+      <p>Python, CSS/HTML, JavaScript, Java, LaTeX</p>
+      <h3>Tools</h3>
+      <p>Proficient with ChatGPT, GitHub, Claude, Gemini, etc.</p>
+      <h3>Systems</h3>
+      <p>
+        Experience with TrueNAS, Proxmox, building custom PCs, OS installations/configurations, and Linux (Arch, Ubuntu, Debian) administration.
+      </p>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+      <h2>Projects</h2>
+      <p>Check out some of my GitHub projects below:</p>
+      <ul>
+        <li>
+          <a href="https://github.com/KaiStephens/TeachAssistScraper" target="_blank">
+            TeachAssistScraper
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/KaiStephens/personalJarvis" target="_blank">
+            personalJarvis
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/KaiStephens/echonotes" target="_blank">
+            echonotes
+          </a>
+        </li>
+      </ul>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Kai Stephens. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript: Fade-in Animation on Scroll -->
+  <script>
+    const sections = document.querySelectorAll('section');
+    const options = {
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, options);
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+  </script>
+</body>
+</html>
