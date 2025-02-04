@@ -18,32 +18,27 @@
       color: #eee;
       overflow-x: hidden;
     }
-    a {
-      color: #ccc;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-      color: #fff;
-    }
     
-    /* Header with Animated Gradient (colorful) */
+    /* Header with Animated Gradient (Colorful) */
     header {
       padding: 40px 20px;
       text-align: center;
+      /* The colorful animated gradient remains here */
       background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #203a43);
       background-size: 400% 400%;
       -webkit-animation: gradientBG 15s ease infinite;
       animation: gradientBG 15s ease infinite;
     }
+    /* WebKit Keyframes for Safari/older browsers */
     @-webkit-keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
+    /* Standard Keyframes */
     @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
     header h1 {
@@ -54,7 +49,7 @@
       font-size: 1.1em;
     }
     
-    /* Navigation Bar (greyscale) */
+    /* Navigation Bar (Greyscale) */
     nav {
       background: #1f1f1f;
       box-shadow: 0 2px 4px rgba(0,0,0,0.5);
@@ -79,7 +74,7 @@
       color: #fff;
     }
     
-    /* Container & Section Styles (greyscale) */
+    /* Container & Section Styles (Greyscale) */
     .container {
       width: 90%;
       max-width: 1000px;
@@ -119,7 +114,7 @@
       margin-bottom: 8px;
     }
     
-    /* Projects Section with Hover Animation (greyscale) */
+    /* Projects Section with Hover Animation (Greyscale) */
     #projects ul {
       list-style: none;
       padding: 0;
@@ -136,7 +131,7 @@
       background: #444;
     }
     
-    /* Footer (greyscale) */
+    /* Footer (Greyscale) */
     footer {
       background: #1f1f1f;
       text-align: center;
@@ -156,7 +151,8 @@
   <header>
     <h1>Kai Stephens</h1>
     <p>
-      Mobile: 289-552-2524 | Email: <a href="mailto:kaistephens208@gmail.com">kaistephens208@gmail.com</a>
+      Mobile: 289-552-2524 | Email:
+      <a href="mailto:kaistephens208@gmail.com">kaistephens208@gmail.com</a>
     </p>
     <p>
       Website: <a href="http://kaios.ca" target="_blank">kaios.ca</a> |
@@ -307,13 +303,10 @@
   <!-- JavaScript: Fade-in Animation on Scroll -->
   <script>
     const sections = document.querySelectorAll('section');
-    const options = {
-      threshold: 0.1
-    };
-
+    const options = { threshold: 0.1 };
     const observer = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
-        if(entry.isIntersecting) {
+        if (entry.isIntersecting) {
           entry.target.classList.add('visible');
           observer.unobserve(entry.target);
         }
