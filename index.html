@@ -4,8 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>About Kai Stephens</title>
-  <!-- Using Montserrat for a modern, clean look -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- Century Gothic is a system font; we also specify fallbacks -->
   <style>
     /* Reset & Base Styles */
     * {
@@ -14,12 +13,13 @@
       box-sizing: border-box;
     }
     body {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 14px;
-      line-height: 1.6;
+      font-family: "Century Gothic", "Apple Gothic", sans-serif;
+      font-size: 16px;
+      line-height: 1.8;
       background: #0d0d0d;
       color: #e0e0e0;
       overflow-x: hidden;
+      padding-bottom: 40px;
     }
     a {
       color: #1abc9c;
@@ -33,12 +33,13 @@
 
     /* Header with Animated Gradient and Shine */
     header {
-      padding: 60px 20px;
+      padding: 80px 20px;
       text-align: center;
       background: linear-gradient(135deg, #1d2b64, #f8cdda);
       animation: gradientShift 10s ease infinite;
       position: relative;
       overflow: hidden;
+      margin-bottom: 40px;
     }
     @keyframes gradientShift {
       0% { filter: hue-rotate(0deg); }
@@ -62,8 +63,8 @@
       100% { left: 100%; }
     }
     header h1 {
-      font-size: 3.5em;
-      margin-bottom: 10px;
+      font-size: 4em;
+      margin-bottom: 20px;
       position: relative;
       z-index: 1;
       animation: popIn 1s ease-out;
@@ -73,7 +74,7 @@
       100% { transform: scale(1); opacity: 1; }
     }
     header p {
-      font-size: 0.9em;
+      font-size: 1em;
       position: relative;
       z-index: 1;
       animation: fadeIn 2s ease-out;
@@ -87,20 +88,22 @@
     nav {
       background: #151515;
       box-shadow: 0 2px 6px rgba(0,0,0,0.7);
+      margin-bottom: 40px;
     }
     nav ul {
       list-style: none;
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      padding: 10px 0;
+      padding: 15px 0;
     }
     nav ul li {
-      margin: 0 15px;
+      margin: 0 20px;
     }
     nav ul li a {
       font-weight: 600;
       transition: transform 0.3s, color 0.3s;
+      font-size: 1em;
     }
     nav ul li a:hover {
       transform: translateY(-3px);
@@ -111,15 +114,15 @@
     .container {
       width: 90%;
       max-width: 1000px;
-      margin: 40px auto;
-      padding: 20px;
+      margin: 0 auto;
+      padding: 40px 30px;
       background: #1c1c1c;
       border-radius: 8px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
     }
     section {
-      margin-bottom: 50px;
-      padding-bottom: 20px;
+      margin-bottom: 60px;
+      padding-bottom: 30px;
       border-bottom: 1px solid #333;
       opacity: 0;
       transform: translateY(20px);
@@ -130,10 +133,10 @@
       transform: translateY(0);
     }
     section h2 {
-      margin-bottom: 15px;
-      padding-bottom: 5px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
       border-bottom: 2px solid #1abc9c;
-      font-size: 2em;
+      font-size: 2.2em;
       animation: slideIn 0.8s ease-out;
     }
     @keyframes slideIn {
@@ -141,16 +144,16 @@
       to { transform: translateX(0); opacity: 1; }
     }
     section h3 {
-      margin: 15px 0 5px;
+      margin: 20px 0 10px;
       color: #1abc9c;
-      font-size: 1.2em;
+      font-size: 1.4em;
     }
     ul {
-      margin-left: 20px;
+      margin-left: 25px;
       list-style: disc;
     }
     li {
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     /* Projects Section with Enhanced Animation */
@@ -159,9 +162,9 @@
       padding: 0;
     }
     #projects li {
-      margin: 15px 0;
+      margin: 20px 0;
       background: #2a2a2a;
-      padding: 15px;
+      padding: 20px;
       border-radius: 6px;
       transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
       position: relative;
@@ -191,8 +194,8 @@
     footer {
       background: #151515;
       text-align: center;
-      padding: 20px;
-      margin-top: 20px;
+      padding: 30px 20px;
+      margin-top: 40px;
       font-size: 0.8em;
       color: #aaa;
     }
@@ -359,22 +362,18 @@
   <!-- JavaScript: Intersection Observer for Section Animations -->
   <script>
     const sections = document.querySelectorAll('section');
-    const options = {
-      threshold: 0.2
-    };
+    const options = { threshold: 0.2 };
 
     const observer = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
-        if(entry.isIntersecting) {
+        if (entry.isIntersecting) {
           entry.target.classList.add('visible');
           observer.unobserve(entry.target);
         }
       });
     }, options);
 
-    sections.forEach(section => {
-      observer.observe(section);
-    });
+    sections.forEach(section => observer.observe(section));
   </script>
 </body>
 </html>
