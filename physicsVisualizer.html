@@ -83,6 +83,7 @@
       <option value="electric">Electric Field</option>
       <option value="wave">Wave Interference</option>
       <option value="circular">Uniform Circular Motion</option>
+      <option value="lissajous">Lissajous Curve</option>
     </select>
 
     <!-- Projectile Motion Parameters -->
@@ -186,7 +187,46 @@
       </label>
     </div>
 
+    <!-- Lissajous Curve Parameters -->
+    <div id="params-lissajous" class="param-section">
+      <h4>Lissajous Curve</h4>
+      <label>Amplitude X:
+        <input type="number" id="lissajous-ampX" value="5" step="0.1">
+      </label>
+      <label>Amplitude Y:
+        <input type="number" id="lissajous-ampY" value="5" step="0.1">
+      </label>
+      <label>Amplitude Z:
+        <input type="number" id="lissajous-ampZ" value="5" step="0.1">
+      </label>
+      <label>Frequency X:
+        <input type="number" id="lissajous-freqX" value="3" step="0.1">
+      </label>
+      <label>Frequency Y:
+        <input type="number" id="lissajous-freqY" value="2" step="0.1">
+      </label>
+      <label>Frequency Z:
+        <input type="number" id="lissajous-freqZ" value="4" step="0.1">
+      </label>
+      <label>Phase X (°):
+        <input type="number" id="lissajous-phaseX" value="0" step="1">
+      </label>
+      <label>Phase Y (°):
+        <input type="number" id="lissajous-phaseY" value="45" step="1">
+      </label>
+      <label>Phase Z (°):
+        <input type="number" id="lissajous-phaseZ" value="90" step="1">
+      </label>
+      <label>Total Points:
+        <input type="number" id="lissajous-points" value="500" step="1">
+      </label>
+    </div>
+
     <button id="updateButton">Update Visualization</button>
+    <button id="resetCameraButton">Reset Camera</button>
+    <button id="toggleAnimationButton">Pause Animation</button>
+    <button id="toggleGridButton">Toggle Grid</button>
+    <button id="screenshotButton">Capture Screenshot</button>
 
     <!-- Information Panel -->
     <div id="info-panel">
@@ -206,11 +246,18 @@
     let currentObject = null;
     let updateFunction = null;  // For animations that update each frame
     let currentFormula = "";
+    let isAnimationPaused = false;
 
     init();
     animate();
 
     function init() {
+      // Check for WebGL support
+      if (!window.WebGLRenderingContext) {
+        alert("Your browser does not support WebGL.");
+        return;
+      }
+
       // Create scene and set background color
       scene = new THREE.Scene();
       scene.background = new THREE.Color(0x1d1f21);
@@ -226,6 +273,7 @@
 
       // Renderer
       renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setPixelRatio(window.devicePixelRatio);
       renderer.setSize(window.innerWidth, window.innerHeight);
       document.body.appendChild(renderer.domElement);
 
@@ -246,6 +294,27 @@
       document.getElementById('updateButton').addEventListener('click', function() {
         loadFormula(document.getElementById('formulaSelect').value);
       });
+      document.getElementById('resetCameraButton').addEventListener('click', function() {
+        camera.position.set(0, 10, 20);
+        controls.target.set(0, 0, 0);
+      });
+      document.getElementById('toggleAnimationButton').addEventListener('click', function() {
+        isAnimationPaused = !isAnimationPaused;
+        this.textContent = isAnimationPaused ? 'Resume Animation' : 'Pause Animation';
+      });
+      document.getElementById('toggleGridButton').addEventListener('click', function() {
+        scene.traverse(function(child) {
+          if (child instanceof THREE.GridHelper) {
+            child.visible = !child.visible;
+          }
+        });
+      });
+      document.getElementById('screenshotButton').addEventListener('click', function() {
+        renderer.render(scene, camera);
+        let dataURL = renderer.domElement.toDataURL('image/png');
+        let win = window.open('');
+        win.document.write('<img src="' + dataURL + '"/>');
+      });
 
       // Initially load the selected formula
       loadFormula(document.getElementById('formulaSelect').value);
@@ -261,7 +330,7 @@
 
     function animate() {
       requestAnimationFrame(animate);
-      if (updateFunction) {
+      if (!isAnimationPaused && updateFunction) {
         updateFunction();
       }
       controls.update();
@@ -351,6 +420,16 @@
             <em>Physics:</em> Represents an object moving in a circle at constant speed, with centripetal acceleration directed toward the center.
           `;
           break;
+        case 'lissajous':
+          infoContent.innerHTML = `
+            <strong>Lissajous Curve</strong><br>
+            <em>Formulas:</em><br>
+            x(t) = A<sub>x</sub> sin(ω<sub>x</sub> t + δ<sub>x</sub>)<br>
+            y(t) = A<sub>y</sub> sin(ω<sub>y</sub> t + δ<sub>y</sub>)<br>
+            z(t) = A<sub>z</sub> sin(ω<sub>z</sub> t + δ<sub>z</sub>)<br>
+            <em>Physics/Math:</em> Demonstrates complex harmonic motion with phase differences, creating intricate 3D patterns.
+          `;
+          break;
         default:
           infoContent.innerHTML = '';
       }
@@ -404,6 +483,10 @@
           document.getElementById('params-circular').style.display = 'block';
           currentObject = createCircularMotion();
           break;
+        case 'lissajous':
+          document.getElementById('params-lissajous').style.display = 'block';
+          currentObject = createLissajousCurve();
+          break;
         default:
           break;
       }
@@ -451,12 +534,9 @@
       return line;
     }
 
-    // 3. Gravitational Field Visualization (Updated)
+    // Gravitational Field Visualization
     function createGravitationalField() {
-      // Create a group for the entire visualization.
       const group = new THREE.Group();
-
-      // Get parameters from UI.
       const mass = parseFloat(document.getElementById('gravity-mass').value) || 10;
       const gridSize = parseFloat(document.getElementById('gravity-gridSize').value) || 20;
       const gridSegments = parseInt(document.getElementById('gravity-gridSegments').value) || 50;
@@ -481,7 +561,6 @@
         transparent: true
       });
       const plane = new THREE.Mesh(planeGeometry, planeMaterial);
-      // Displace vertices: y = –mass · exp(–r²/(2 · wellSpread²))
       const positions = planeGeometry.attributes.position.array;
       for (let i = 0; i < positions.length; i += 3) {
         let x = positions[i];
@@ -517,7 +596,7 @@
       return group;
     }
 
-    // 4. Simple Pendulum Visualization (Animated)
+    // Simple Pendulum Visualization (Animated)
     function createSimplePendulum() {
       const length = parseFloat(document.getElementById('pendulum-length').value) || 5;
       const maxAngleDeg = parseFloat(document.getElementById('pendulum-angle').value) || 30;
@@ -554,11 +633,9 @@
       return pendulum;
     }
 
-    // 5. Electric Field Visualization
+    // Electric Field Visualization
     function createElectricField() {
       const group = new THREE.Group();
-
-      // Charged sphere
       const sphereGeometry = new THREE.SphereGeometry(1, 32, 32);
       const sphereMaterial = new THREE.MeshPhongMaterial({ color: 0xff4444, shininess: 100 });
       const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
@@ -588,7 +665,7 @@
       return group;
     }
 
-    // 6. Wave Interference Visualization (Animated)
+    // Wave Interference Visualization (Animated)
     function createWaveInterference() {
       const amplitude = parseFloat(document.getElementById('wave-amplitude').value) || 1;
       const wavelength = parseFloat(document.getElementById('wave-wavelength').value) || 4;
@@ -623,7 +700,7 @@
       return plane;
     }
 
-    // 7. Uniform Circular Motion Visualization (Animated)
+    // Uniform Circular Motion Visualization (Animated)
     function createCircularMotion() {
       const group = new THREE.Group();
       const radius = parseFloat(document.getElementById('circular-radius').value) || 5;
@@ -650,6 +727,37 @@
       };
       scene.add(group);
       return group;
+    }
+
+    // Lissajous Curve Visualization
+    function createLissajousCurve() {
+      const ampX = parseFloat(document.getElementById('lissajous-ampX').value) || 5;
+      const ampY = parseFloat(document.getElementById('lissajous-ampY').value) || 5;
+      const ampZ = parseFloat(document.getElementById('lissajous-ampZ').value) || 5;
+      const freqX = parseFloat(document.getElementById('lissajous-freqX').value) || 3;
+      const freqY = parseFloat(document.getElementById('lissajous-freqY').value) || 2;
+      const freqZ = parseFloat(document.getElementById('lissajous-freqZ').value) || 4;
+      const phaseXDeg = parseFloat(document.getElementById('lissajous-phaseX').value) || 0;
+      const phaseYDeg = parseFloat(document.getElementById('lissajous-phaseY').value) || 45;
+      const phaseZDeg = parseFloat(document.getElementById('lissajous-phaseZ').value) || 90;
+      const phaseX = phaseXDeg * Math.PI / 180;
+      const phaseY = phaseYDeg * Math.PI / 180;
+      const phaseZ = phaseZDeg * Math.PI / 180;
+      const totalPoints = parseInt(document.getElementById('lissajous-points').value) || 500;
+
+      let points = [];
+      for (let i = 0; i <= totalPoints; i++) {
+        let t = i / totalPoints * 2 * Math.PI;
+        let x = ampX * Math.sin(freqX * t + phaseX);
+        let y = ampY * Math.sin(freqY * t + phaseY);
+        let z = ampZ * Math.sin(freqZ * t + phaseZ);
+        points.push(new THREE.Vector3(x, y, z));
+      }
+      const geometry = new THREE.BufferGeometry().setFromPoints(points);
+      const material = new THREE.LineBasicMaterial({ color: 0xff00ff, linewidth: 2 });
+      const line = new THREE.Line(geometry, material);
+      scene.add(line);
+      return line;
     }
   </script>
 </body>
