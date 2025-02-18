@@ -2,378 +2,671 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>About Kai Stephens</title>
-  <!-- Century Gothic is a system font; we also specify fallbacks -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kai Stephens | Creative Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <!-- Combined CSS -->
   <style>
-    /* Reset & Base Styles */
+    :root {
+      --primary: #FF3366;
+      --background: #141414;
+      --foreground: #ffffff;
+      --foreground-60: rgba(255, 255, 255, 0.6);
+      --font-clash: 'Clash Display', sans-serif;
+      --font-space: 'Space Grotesk', sans-serif;
+    }
+    
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+    
     body {
-      font-family: "Century Gothic", "Apple Gothic", sans-serif;
-      font-size: 16px;
-      line-height: 1.8;
-      background: #0d0d0d;
-      color: #e0e0e0;
+      background-color: var(--background);
+      color: var(--foreground);
+      font-family: var(--font-space);
+      line-height: 1.5;
       overflow-x: hidden;
-      padding-bottom: 40px;
     }
-    a {
-      color: #1abc9c;
+    
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 5rem;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+      z-index: 50;
+      background: transparent;
+    }
+    
+    .nav-link {
+      writing-mode: vertical-rl;
       text-decoration: none;
-      transition: color 0.3s;
+      color: var(--foreground-60);
+      font-family: var(--font-clash);
+      font-size: 0.875rem;
+      transition: color 0.3s ease, transform 0.3s ease;
     }
-    a:hover {
-      color: #f39c12;
-      text-decoration: underline;
+    
+    .nav-link:hover {
+      color: var(--primary);
+      transform: scale(1.1);
     }
-
-    /* Header with Animated Gradient and Shine */
-    header {
-      padding: 80px 20px;
-      text-align: center;
-      background: linear-gradient(135deg, #1d2b64, #f8cdda);
-      animation: gradientShift 10s ease infinite;
+    
+    .nav-link[data-active="true"] {
+      color: var(--primary);
+    }
+    
+    /* Common Section Styles */
+    .section {
+      min-height: 100vh;
+      width: 100vw;
+      display: flex;
+      align-items: center;
+      padding: 5rem 2rem 5rem 8rem;
       position: relative;
       overflow: hidden;
-      margin-bottom: 40px;
     }
-    @keyframes gradientShift {
-      0% { filter: hue-rotate(0deg); }
-      50% { filter: hue-rotate(180deg); }
-      100% { filter: hue-rotate(360deg); }
-    }
-    header::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -50%;
-      width: 200%;
-      height: 100%;
-      background: rgba(0,0,0,0.1);
-      transform: skewX(-25deg);
-      animation: shine 2s infinite;
-    }
-    @keyframes shine {
-      0% { left: -100%; }
-      50% { left: 100%; }
-      100% { left: 100%; }
-    }
-    header h1 {
-      font-size: 4em;
-      margin-bottom: 20px;
+    
+    /* --- Home Section (from second snippet) --- */
+    .content {
       position: relative;
-      z-index: 1;
-      animation: popIn 1s ease-out;
-    }
-    @keyframes popIn {
-      0% { transform: scale(0.8); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-    header p {
-      font-size: 1em;
-      position: relative;
-      z-index: 1;
-      animation: fadeIn 2s ease-out;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    /* Navigation */
-    nav {
-      background: #151515;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.7);
-      margin-bottom: 40px;
-    }
-    nav ul {
-      list-style: none;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      padding: 15px 0;
-    }
-    nav ul li {
-      margin: 0 20px;
-    }
-    nav ul li a {
-      font-weight: 600;
-      transition: transform 0.3s, color 0.3s;
-      font-size: 1em;
-    }
-    nav ul li a:hover {
-      transform: translateY(-3px);
-      color: #f39c12;
-    }
-
-    /* Main Container & Sections */
-    .container {
-      width: 90%;
-      max-width: 1000px;
+      z-index: 10;
+      text-align: center;
+      max-width: 64rem;
       margin: 0 auto;
-      padding: 40px 30px;
-      background: #1c1c1c;
-      border-radius: 8px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
     }
-    section {
-      margin-bottom: 60px;
-      padding-bottom: 30px;
-      border-bottom: 1px solid #333;
+    
+    .name {
+      display: block;
+      font-family: var(--font-space);
+      font-size: 1.5rem;
+      color: var(--foreground-60);
+      margin-bottom: 1rem;
       opacity: 0;
       transform: translateY(20px);
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      animation: fadeInUp 0.8s ease forwards 0.2s;
     }
-    section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    section h2 {
-      margin-bottom: 20px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid #1abc9c;
-      font-size: 2.2em;
-      animation: slideIn 0.8s ease-out;
-    }
-    @keyframes slideIn {
-      from { transform: translateX(-50px); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
-    section h3 {
-      margin: 20px 0 10px;
-      color: #1abc9c;
-      font-size: 1.4em;
-    }
-    ul {
-      margin-left: 25px;
-      list-style: disc;
-    }
-    li {
-      margin-bottom: 10px;
-    }
-
-    /* Projects Section with Enhanced Animation */
-    #projects ul {
-      list-style: none;
-      padding: 0;
-    }
-    #projects li {
-      margin: 20px 0;
-      background: #2a2a2a;
-      padding: 20px;
-      border-radius: 6px;
-      transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+    
+    .title {
+      font-family: var(--font-clash);
+      font-size: 6rem;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
       position: relative;
-      overflow: hidden;
     }
-    #projects li:hover {
-      transform: translateX(10px);
-      background: #1abc9c;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-    }
-    #projects li::before {
-      content: "";
+    
+    .title-bg {
       position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.15), transparent);
+      inset: -2.5rem -5rem;
+      background: radial-gradient(
+        circle at center,
+        rgba(255, 51, 102, 0.15) 0%,
+        rgba(255, 215, 0, 0.15) 30%,
+        rgba(0, 255, 178, 0.15) 60%,
+        transparent 100%
+      );
+      opacity: 0.7;
+      filter: blur(50px);
+      animation: pulse 8s ease-in-out infinite;
+      transform-origin: center;
+      border-radius: 50%;
+      transition: all 0.5s ease;
+    }
+    
+    .title-text {
+      position: relative;
+      background: linear-gradient(to right, var(--primary), #FFD700, #00FFB2);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .subtitle {
+      font-size: 1.125rem;
+      color: var(--foreground-60);
+      max-width: 28rem;
+      margin: 0 auto;
       opacity: 0;
-      transition: opacity 0.5s;
+      animation: fadeIn 1.2s ease forwards 0.5s;
     }
-    #projects li:hover::before {
+    
+    .gradient-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(255, 51, 102, 0.08) 0%,
+        rgba(255, 215, 0, 0.05) 25%,
+        rgba(0, 255, 178, 0.03) 50%,
+        transparent 75%
+      );
+      mix-blend-mode: overlay;
+      transition: background 0.3s ease;
+      pointer-events: none;
+      filter: blur(20px);
+    }
+    
+    /* --- Projects Section (from original code) --- */
+    .projects-container {
+      width: 100%;
+      max-width: 64rem;
+      margin: 0 auto;
+    }
+    
+    .project {
+      position: relative;
+      margin-bottom: 6rem;
+      opacity: 0;
+      transform: translateX(-20px);
+      animation: slideInLeft 0.8s ease forwards;
+    }
+    
+    .project-dot {
+      position: absolute;
+      left: -2rem;
+      top: 50%;
+      width: 0.5rem;
+      height: 0.5rem;
+      background-color: var(--primary);
+      border-radius: 50%;
+      transform: scale(0);
+      animation: scaleIn 0.6s ease forwards;
+    }
+    
+    .project-title {
+      font-family: var(--font-clash);
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: bold;
+      margin-bottom: 1rem;
+      opacity: 0.2;
+      background: linear-gradient(to right, var(--primary), #00FFB2);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      transform: translateX(0);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    
+    .project:hover .project-title {
       opacity: 1;
+      transform: translateX(1rem);
     }
-
-    /* Footer */
-    footer {
-      background: #151515;
-      text-align: center;
-      padding: 30px 20px;
-      margin-top: 40px;
-      font-size: 0.8em;
-      color: #aaa;
+    
+    .project-description {
+      font-size: 1rem;
+      color: var(--foreground-60);
+      max-width: 28rem;
+      margin-bottom: 1rem;
+      transform: translateX(0);
+      transition: transform 0.5s ease;
     }
-
-    /* Smooth Scroll */
-    html {
-      scroll-behavior: smooth;
+    
+    .project:hover .project-description {
+      transform: translateX(1rem);
+    }
+    
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      transform: translateX(0);
+      transition: transform 0.5s ease;
+    }
+    
+    .project:hover .project-tech {
+      transform: translateX(1rem);
+    }
+    
+    .tech-tag {
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.25rem 0.625rem;
+      border-radius: 9999px;
+      background-color: rgba(255, 51, 102, 0.1);
+      color: var(--primary);
+    }
+    
+    .project-links {
+      display: flex;
+      gap: 1rem;
+      transform: translateX(0);
+      transition: transform 0.5s ease;
+    }
+    
+    .project:hover .project-links {
+      transform: translateX(1rem);
+    }
+    
+    .project-link {
+      color: var(--foreground-60);
+      transition: color 0.3s ease;
+    }
+    
+    .project-link:hover {
+      color: var(--primary);
+    }
+    
+    .icon {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+    
+    /* --- Contact Section (from original code) --- */
+    .contact-container {
+      max-width: 32rem;
+    }
+    
+    .contact-title {
+      font-family: var(--font-clash);
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: bold;
+      margin-bottom: 3rem;
+      background: linear-gradient(to right, var(--primary), #00FFB2);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      color: var(--foreground-60);
+      text-decoration: none;
+      font-size: 1.25rem;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+    
+    .contact-link:hover {
+      color: var(--primary);
+      transform: translateX(1.25rem);
+    }
+    
+    .contact-link span {
+      transition: transform 0.3s ease;
+    }
+    
+    .contact-link:hover span {
+      transform: translateX(0.5rem);
+    }
+    
+    /* --- Animations --- */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1) rotate(0deg);
+      }
+      50% {
+        transform: scale(1.1) rotate(5deg);
+      }
+    }
+    
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    @keyframes scaleIn {
+      from {
+        transform: scale(0);
+      }
+      to {
+        transform: scale(1);
+      }
+    }
+    
+    /* --- Responsive Design --- */
+    @media (max-width: 768px) {
+      .nav {
+        width: 100%;
+        height: auto;
+        bottom: 0;
+        top: auto;
+        flex-direction: row;
+        padding: 1rem;
+        background: rgba(20, 20, 20, 0.8);
+        backdrop-filter: blur(8px);
+      }
+    
+      .nav-link {
+        writing-mode: horizontal-tb;
+      }
+    
+      .section {
+        padding: 5rem 2rem;
+      }
+    
+      .title {
+        font-size: clamp(3rem, 10vw, 6rem);
+      }
+    
+      .project-title {
+        font-size: clamp(2rem, 8vw, 4rem);
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Header Section -->
-  <header>
-    <h1>Kai Stephens</h1>
-    <p>
-      Mobile: 289-552-2524 | Email: <a href="mailto:kaistephens208@gmail.com">kaistephens208@gmail.com</a>
-    </p>
-    <p>
-      Website: <a href="http://kaios.ca" target="_blank">kaios.ca</a> |
-      GitHub: <a href="https://github.com/KaiStephens" target="_blank">github.com/KaiStephens</a>
-    </p>
-  </header>
-
   <!-- Navigation -->
-  <nav>
-    <ul>
-      <li><a href="#about">About Me</a></li>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#achievements">Achievements</a></li>
-      <li><a href="#community">Community</a></li>
-      <li><a href="#interests">Interests</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-    </ul>
+  <nav class="nav">
+    <a href="#home" class="nav-link" data-active="true">Home</a>
+    <a href="#projects" class="nav-link">Work</a>
+    <a href="#contact" class="nav-link">Hello</a>
   </nav>
 
-  <!-- Main Content Container -->
-  <div class="container">
-    <!-- About Me Section -->
-    <section id="about">
-      <h2>About Me</h2>
-      <p>
-        Driven and technically skilled individual seeking opportunities to apply my expertise in programming, computers, and communication skills. Passionate about technology, learning, and efficiency—and dedicated to fostering community spirit through teamwork and local initiatives.
-      </p>
-    </section>
+  <!-- Home Section (from second snippet) -->
+  <section id="home" class="section active">
+    <div class="content">
+      <span class="name">Kai Stephens</span>
+      <h1 class="title">
+        <div class="title-bg"></div>
+        <span class="title-text">
+          Creative<br>
+          Developer
+        </span>
+      </h1>
+      <p class="subtitle">Crafting digital experiences through code and creativity</p>
+    </div>
+    <div class="gradient-bg"></div>
+  </section>
 
-    <!-- Education Section -->
-    <section id="education">
-      <h2>Education</h2>
-      <h3>Sir William Mulock S.S. – Grade 11 (2022–Present)</h3>
-      <p>Newmarket, ON</p>
-      <ul>
-        <li>Working towards OSSD.</li>
-        <li>Received Grade 9 English award for achieving 100% in the course.</li>
-        <li>Active in clubs: coding club, robotics club, and community outreach (tutoring peers).</li>
-        <li>Participated in competitions such as the Waterloo Coding Competition.</li>
-        <li>
-          Course Achievements:
-          <ul>
-            <li>Exploring Technologies (99%)</li>
-            <li>Digital Technology and Innovations in the Changing World (100%)</li>
-            <li>Computer Technology (Grades 9–11: 100%)</li>
-            <li>Computer Science (Grades 9–11: 100%)</li>
-            <li>English (Grades 9–10: 100%)</li>
-          </ul>
-        </li>
-      </ul>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience">
-      <h2>Experience</h2>
-      <h3>Co-op Software Developer – Treefrog Inc (Winter 2025)</h3>
-      <p>Newmarket, ON</p>
-      <ul>
-        <li>Developed and maintained software tools to support internal operations.</li>
-        <li>Collaborated with cross-functional teams to enhance project outcomes.</li>
-        <li>Participated in team-building activities and company events.</li>
-        <li>Gained practical experience in coding best practices, version control, and testing.</li>
-      </ul>
-      <h3>Assistant Intern – Studio Forma Interior Design Inc (Spring 2024)</h3>
-      <p>Newmarket, ON</p>
-      <ul>
-        <li>Assisted the design team with digital solutions and software integrations.</li>
-        <li>Supported the automation of online services to streamline workflow.</li>
-        <li>Contributed to developing tools to optimize interior design operations.</li>
-        <li>Engaged with colleagues and clients during community events.</li>
-      </ul>
-    </section>
-
-    <!-- Achievements Section -->
-    <section id="achievements">
-      <h2>Achievements</h2>
-      <ul>
-        <li><strong>Honour Roll:</strong> Achieved Honour Roll in Grades 9 and 10.</li>
-        <li><strong>English Award:</strong> Received a 100% achievement award in English (2023).</li>
-        <li><strong>Competition:</strong> 2nd place in the Waterloo Computing Competition.</li>
-        <li><strong>Certification:</strong> Completed Customer Service &amp; Leadership SHSM Certification at TRCA.</li>
-      </ul>
-    </section>
-
-    <!-- Community Involvement Section -->
-    <section id="community">
-      <h2>Community Involvement</h2>
-      <ul>
-        <li>Volunteered at local tech meet-ups and business start-up bootcamps (Y2 Entrepreneurship Labs), teaching programming basics.</li>
-        <li>Organized school events and collaborated on creating the school website with the Technology teacher.</li>
-        <li>Provided tutoring support in coding, science, and math.</li>
-        <li>Participated in business conferences and tech meet-ups to exchange ideas.</li>
-      </ul>
-    </section>
-
-    <!-- Interests & Hobbies Section -->
-    <section id="interests">
-      <h2>Interests &amp; Hobbies</h2>
-      <p>
-        Solving coding and robotics challenges, rock climbing, building robots, hosting servers, 3D printing, networking, Cloudflare services, and engaging in community events and clubs (chess, coding, robotics).
-      </p>
-    </section>
-
-    <!-- Computer Skills Section -->
-    <section id="skills">
-      <h2>Computer Skills</h2>
-      <h3>Programming</h3>
-      <p>Python, CSS/HTML, JavaScript, Java, LaTeX</p>
-      <h3>Tools</h3>
-      <p>Proficient with ChatGPT, GitHub, Claude, Gemini, etc.</p>
-      <h3>Systems</h3>
-      <p>
-        Experience with TrueNAS, Proxmox, building custom PCs, OS installations/configurations, and Linux (Arch, Ubuntu, Debian) administration.
-      </p>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects">
-      <h2>Projects</h2>
-      <p>Check out some of my GitHub projects below:</p>
-      <ul>
-        <li>
-          <a href="https://github.com/KaiStephens/TeachAssistScraper" target="_blank">
-            TeachAssistScraper
+  <!-- Projects Section (from original code) -->
+  <section id="projects" class="section">
+    <div class="projects-container">
+      <div class="project">
+        <div class="project-dot"></div>
+        <h2 class="project-title">Auto Robot Navigator</h2>
+        <p class="project-description">
+          An autonomous robot navigation system using computer vision and Bluetooth control. Features real-time
+          perspective correction, color-based detection, and precise movement calculations.
+        </p>
+        <div class="project-tech">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">OpenCV</span>
+          <span class="tech-tag">Bluetooth</span>
+          <span class="tech-tag">ESP32</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/KaiStephens/autoRobot" target="_blank" rel="noopener noreferrer" class="project-link">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61
+                   c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77
+                   5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38
+                   13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07
+                   5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5
+                   3.78c0 5.42 3.3 6.61 6.44
+                   7A3.37 3.37 0 0 0 9 18.13V22"
+              ></path>
+            </svg>
           </a>
-        </li>
-        <li>
-          <a href="https://github.com/KaiStephens/personalJarvis" target="_blank">
-            personalJarvis
+        </div>
+      </div>
+      
+      <div class="project">
+        <div class="project-dot"></div>
+        <h2 class="project-title">Echo Notes</h2>
+        <p class="project-description">
+          A smart lecture recording and summarization tool that uses AI to transcribe and generate concise summaries.
+          Features both local Whisper and OpenAI API integration for flexible speech recognition.
+        </p>
+        <div class="project-tech">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">OpenAI</span>
+          <span class="tech-tag">Whisper</span>
+          <span class="tech-tag">Audio Processing</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/KaiStephens/echonotes" target="_blank" rel="noopener noreferrer" class="project-link">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37
+                   3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54
+                   6.44-7A5.44 5.44 0 0 0 20 4.77
+                   5.07 5.07 0 0 0 19.91 1S18.73.65
+                   16 2.48a13.38 13.38 0 0 0-7 0C6.27.65
+                   5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44
+                   5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61
+                   6.44 7A3.37 3.37 0 0 0 9
+                   18.13V22"
+              ></path>
+            </svg>
           </a>
-        </li>
-        <li>
-          <a href="https://github.com/KaiStephens/echonotes" target="_blank">
-            echonotes
+        </div>
+      </div>
+      
+      <div class="project">
+        <div class="project-dot"></div>
+        <h2 class="project-title">Personal Jarvis</h2>
+        <p class="project-description">
+          An advanced AI assistant with wake word detection, weather updates, and natural conversation capabilities.
+          Features ElevenLabs TTS and real-time environmental monitoring.
+        </p>
+        <div class="project-tech">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Speech Recognition</span>
+          <span class="tech-tag">ElevenLabs API</span>
+          <span class="tech-tag">Weather API</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/KaiStephens/personalJarvis" target="_blank" rel="noopener noreferrer" class="project-link">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35
+                   6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91
+                   1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09
+                   1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42
+                   3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+              ></path>
+            </svg>
           </a>
-        </li>
-      </ul>
-    </section>
-  </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 Kai Stephens. All rights reserved.</p>
-  </footer>
+  <!-- Contact Section (from original code) -->
+  <section id="contact" class="section">
+    <div class="contact-container">
+      <h1 class="contact-title">Say Hello</h1>
+      <div class="contact-links">
+        <a href="mailto:kaio@kaios.ca" class="contact-link">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+            ></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+          <span>Email</span>
+        </a>
+        <a href="https://github.com/KaiStephens" target="_blank" rel="noopener noreferrer" class="contact-link">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35
+                 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91
+                 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07
+                 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9
+                 18.13V22"
+            ></path>
+          </svg>
+          <span>Github</span>
+        </a>
+        <a href="https://twitter.com/kaiostephens" target="_blank" rel="noopener noreferrer" class="contact-link">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66
+                 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72
+                 7.72 0 0 0 23 3z"
+            ></path>
+          </svg>
+          <span>Twitter</span>
+        </a>
+      </div>
+    </div>
+  </section>
 
-  <!-- JavaScript: Intersection Observer for Section Animations -->
+  <!-- Combined JavaScript -->
   <script>
-    const sections = document.querySelectorAll('section');
-    const options = { threshold: 0.2 };
-
-    const observer = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
+    document.addEventListener('DOMContentLoaded', () => {
+      // Mouse position tracking for the home section using throttle
+      const root = document.documentElement;
+      const gradientBg = document.querySelector('.gradient-bg');
+    
+      const updateMousePosition = (e) => {
+        const x = e.clientX;
+        const y = e.clientY;
+        const xPercent = (x / window.innerWidth) * 100;
+        const yPercent = (y / window.innerHeight) * 100;
+        root.style.setProperty('--mouse-x', `${xPercent}%`);
+        root.style.setProperty('--mouse-y', `${yPercent}%`);
+    
+        const content = document.querySelector('.content');
+        if (content) {
+          const moveX = (x - window.innerWidth / 2) * 0.03;
+          const moveY = (y - window.innerHeight / 2) * 0.03;
+          content.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
         }
+      };
+    
+      const throttle = (func, limit) => {
+        let inThrottle;
+        return function(e) {
+          if (!inThrottle) {
+            func(e);
+            inThrottle = true;
+            setTimeout(() => (inThrottle = false), limit);
+          }
+        };
+      };
+    
+      document.addEventListener('mousemove', throttle(updateMousePosition, 16));
+    
+      // Navigation highlighting and smooth scrolling
+      const sections = document.querySelectorAll('.section');
+      const navLinks = document.querySelectorAll('.nav-link');
+    
+      const updateActiveSection = () => {
+        const scrollPosition = window.scrollY;
+    
+        sections.forEach((section, index) => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.offsetHeight;
+    
+          if (
+            scrollPosition >= sectionTop - window.innerHeight / 2 &&
+            scrollPosition < sectionTop + sectionHeight - window.innerHeight / 2
+          ) {
+            navLinks.forEach(link => link.setAttribute('data-active', 'false'));
+            navLinks[index].setAttribute('data-active', 'true');
+          }
+        });
+      };
+    
+      window.addEventListener('scroll', updateActiveSection);
+      updateActiveSection();
+    
+      navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute('href');
+          const targetSection = document.querySelector(targetId);
+    
+          if (targetSection) {
+            targetSection.scrollIntoView({
+              behavior: 'smooth'
+            });
+          }
+        });
       });
-    }, options);
-
-    sections.forEach(section => observer.observe(section));
+    
+      // Project animations via IntersectionObserver
+      const projects = document.querySelectorAll('.project');
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -20% 0px'
+      };
+    
+      const projectObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.animation = 'slideInLeft 0.8s ease forwards';
+            const dot = entry.target.querySelector('.project-dot');
+            if (dot) {
+              dot.style.animation = 'scaleIn 0.6s ease forwards 0.3s';
+            }
+          }
+        });
+      }, observerOptions);
+    
+      projects.forEach(project => {
+        projectObserver.observe(project);
+      });
+    
+      // Contact link animations via IntersectionObserver
+      const contactLinks = document.querySelectorAll('.contact-link');
+      const contactObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            entry.target.style.animation = `fadeInUp 0.8s ease forwards ${index * 0.1}s`;
+          }
+        });
+      }, observerOptions);
+    
+      contactLinks.forEach(link => {
+        contactObserver.observe(link);
+      });
+    });
   </script>
 </body>
 </html>
