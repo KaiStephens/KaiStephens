@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Interactive Physics Graphs with Advanced Controls</title>
+  <!-- Include Chart.js v2.9.4 -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+  <!-- Include the drag data plugin -->
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-dragdata@2.0.0/dist/chartjs-plugin-dragdata.min.js"></script>
+  <style>
+    body { 
+      font-family: Arial, sans-serif; 
+      background: #f8f8f8; 
+      margin: 0; 
+      padding: 0;
+    }
+    h2 { text-align: center; margin-top: 20px; }
+    .controls {
+      width: 80%;
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 15px;
+      background: #e8e8e8;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .controls label { font-weight: bold; }
+    .controls input[type=range] { width: 200px; margin-right: 10px; }
+    .controls input[type=number] { width: 70px; }
+    .chart-container {
+      width: 80%;
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    canvas { margin-bottom: 50px; }
+  </style>
+</head>
+<body>
+  <h2>Interactive Physics Graphs<br>
+      Distance–Time, Velocity–Time, and Acceleration–Time</h2>
+      
+  <!-- Control Panel -->
+  <div class="controls">
+    <h3>Control Panel</h3>
+    
+    <!-- Acceleration Model Selection -->
+    <div>
+      <label>Acceleration Model:</label>
+      <input type="radio" name="accModel" value="constant" id="accModelConstant" checked>
+      <label for="accModelConstant">Constant</label>
+      <input type="radio" name="accModel" value="exponential" id="accModelExponential">
+      <label for="accModelExponential">Exponential</label>
+    </div>
+    <br>
+    <!-- Constant Acceleration Controls -->
+    <div id="constantAccelerationControls">
+      <label for="accelerationSlider">Constant Acceleration (a): </label>
+      <input type="range" id="accelerationSlider" min="-10" max="10" step="0.1" value="1">
+      <input type="number" id="accelerationInput" min="-10" max="10" step="0.1" value="1">
+    </div>
+    <!-- Exponential Acceleration Controls -->
+    <div id="exponentialAccelerationControls" style="display: none;">
+      <div>
+        <label for="expAccSlider">Acceleration Amplitude (A): </label>
+        <input type="range" id="expAccSlider" min="-10" max="10" step="0.1" value="1">
+        <input type="number" id="expAccInput" min="-10" max="10" step="0.1" value="1">
+      </div>
+      <br>
+      <div>
+        <label for="expFactorSlider">Exponential Factor (B): </label>
+        <input type="range" id="expFactorSlider" min="-1" max="1" step="0.01" value="0.1">
+        <input type="number" id="expFactorInput" min="-1" max="1" step="0.01" value="0.1">
+      </div>
+    </div>
+    <br>
+    <!-- Common Initial Conditions -->
+    <div>
+      <label for="velocitySlider">Initial Velocity (v₀): </label>
+      <input type="range" id="velocitySlider" min="-10" max="10" step="0.1" value="0">
+      <input type="number" id="velocityInput" min="-10" max="10" step="0.1" value="0">
+    </div>
+    <br>
+    <div>
+      <label for="distanceSlider">Initial Distance (d₀): </label>
+      <input type="range" id="distanceSlider" min="-50" max="50" step="0.1" value="0">
+      <input type="number" id="distanceInput" min="-50" max="50" step="0.1" value="0">
+    </div>
+    <br>
+    <small>Changing these controls resets the graphs to follow the chosen model.</small>
+  </div>
+  
+  <!-- Chart Containers -->
+  <div class="chart-container">
+    <!-- Distance-Time Chart -->
+    <canvas id="chartDistance"></canvas>
+    <!-- Velocity-Time Chart -->
+    <canvas id="chartVelocity"></canvas>
+    <!-- Centered Acceleration-Time Chart -->
+    <div style="text-align: center;">
+      <canvas id="chartAcceleration" style="display: inline-block;"></canvas>
+    </div>
+  </div>
+  
+  <script>
+    // Define global variables and arrays.
+    var n = 51;         // Number of points.
+    var T = 10;         // Total time (seconds).
+    var timePoints = [];
+    for (var i = 0; i < n; i++) {
+      timePoints.push((T * i) / (n - 1));
+    }
+    
+    // Arrays for the three functions.
+    var distance = new Array(n);
+    var velocity = new Array(n);
+    var acceleration = new Array(n);
+    
+    // --- Update Function from Control Panel ---
+    function updateFromControls() {
+      // Get initial conditions.
+      var v0 = parseFloat(document.getElementById("velocitySlider").value);
+      var d0 = parseFloat(document.getElementById("distanceSlider").value);
+      
+      // Check which acceleration model is selected.
+      var model = document.querySelector('input[name="accModel"]:checked').value;
+      
+      if (model === "constant") {
+        var aConst = parseFloat(document.getElementById("accelerationSlider").value);
+        for (var i = 0; i < n; i++) {
+          var t = timePoints[i];
+          acceleration[i] = aConst;
+          velocity[i]     = v0 + aConst * t;
+          distance[i]     = d0 + v0 * t + 0.5 * aConst * t * t;
+        }
+      } else if (model === "exponential") {
+        var A = parseFloat(document.getElementById("expAccSlider").value);
+        var B = parseFloat(document.getElementById("expFactorSlider").value);
+        for (var i = 0; i < n; i++) {
+          var t = timePoints[i];
+          acceleration[i] = A * Math.exp(B * t);
+          if (Math.abs(B) < 1e-6) {
+            velocity[i] = v0 + A * t;
+            distance[i] = d0 + v0 * t + 0.5 * A * t * t;
+          } else {
+            velocity[i] = v0 + (A / B) * (Math.exp(B * t) - 1);
+            distance[i] = d0 + v0 * t + (A / (B * B)) * (Math.exp(B * t) - 1 - B * t);
+          }
+        }
+      }
+      
+      // Update all charts.
+      chartDistance.data.datasets[0].data = distance.slice();
+      chartVelocity.data.datasets[0].data = velocity.slice();
+      chartAcceleration.data.datasets[0].data = acceleration.slice();
+      chartDistance.update();
+      chartVelocity.update();
+      chartAcceleration.update();
+    }
+    
+    // --- Functions for Dragging (Numerical Update) ---
+    // When a point is dragged on one graph, update the other functions numerically.
+    function updateFromDistance() {
+      for (var i = 0; i < n; i++) {
+        if (i === 0) {
+          velocity[i] = (distance[i+1] - distance[i]) / (timePoints[i+1] - timePoints[i]);
+        } else if (i === n - 1) {
+          velocity[i] = (distance[i] - distance[i-1]) / (timePoints[i] - timePoints[i-1]);
+        } else {
+          velocity[i] = (distance[i+1] - distance[i-1]) / (timePoints[i+1] - timePoints[i-1]);
+        }
+      }
+      for (var i = 0; i < n; i++) {
+        if (i === 0) {
+          acceleration[i] = (velocity[i+1] - velocity[i]) / (timePoints[i+1] - timePoints[i]);
+        } else if (i === n - 1) {
+          acceleration[i] = (velocity[i] - velocity[i-1]) / (timePoints[i] - timePoints[i-1]);
+        } else {
+          acceleration[i] = (velocity[i+1] - velocity[i-1]) / (timePoints[i+1] - timePoints[i-1]);
+        }
+      }
+    }
+    function updateFromVelocity() {
+      for (var i = 0; i < n; i++) {
+        if (i === 0) {
+          acceleration[i] = (velocity[i+1] - velocity[i]) / (timePoints[i+1] - timePoints[i]);
+        } else if (i === n - 1) {
+          acceleration[i] = (velocity[i] - velocity[i-1]) / (timePoints[i] - timePoints[i-1]);
+        } else {
+          acceleration[i] = (velocity[i+1] - velocity[i-1]) / (timePoints[i+1] - timePoints[i-1]);
+        }
+      }
+      // Integrate to update distance.
+      for (var i = 1; i < n; i++) {
+        var dt = timePoints[i] - timePoints[i-1];
+        distance[i] = distance[i-1] + 0.5 * (velocity[i-1] + velocity[i]) * dt;
+      }
+    }
+    function updateFromAcceleration() {
+      for (var i = 1; i < n; i++) {
+        var dt = timePoints[i] - timePoints[i-1];
+        velocity[i] = velocity[i-1] + 0.5 * (acceleration[i-1] + acceleration[i]) * dt;
+      }
+      for (var i = 1; i < n; i++) {
+        var dt = timePoints[i] - timePoints[i-1];
+        distance[i] = distance[i-1] + 0.5 * (velocity[i-1] + velocity[i]) * dt;
+      }
+    }
+    
+    // --- Chart Setup ---
+    var commonOptions = {
+      responsive: true,
+      scales: {
+        xAxes: [{
+          scaleLabel: { display: true, labelString: 'Time (s)' },
+          ticks: { autoSkip: true, maxTicksLimit: 10 }
+        }],
+        yAxes: [{
+          ticks: { beginAtZero: true }
+        }]
+      },
+      tooltips: { mode: 'nearest', intersect: false },
+      // Enable dragging of points:
+      dragData: true,
+      dragDataRound: 2,
+      onDragEnd: function(e, datasetIndex, index, value) {
+        if (this.chart.myType === 'distance') {
+          distance[index] = value;
+          updateFromDistance();
+        } else if (this.chart.myType === 'velocity') {
+          velocity[index] = value;
+          updateFromVelocity();
+        } else if (this.chart.myType === 'acceleration') {
+          acceleration[index] = value;
+          updateFromAcceleration();
+        }
+        // Update all charts with the new data.
+        chartDistance.data.datasets[0].data = distance.slice();
+        chartVelocity.data.datasets[0].data = velocity.slice();
+        chartAcceleration.data.datasets[0].data = acceleration.slice();
+        chartDistance.update();
+        chartVelocity.update();
+        chartAcceleration.update();
+      }
+    };
+    
+    // Create the Distance-Time chart.
+    var ctxD = document.getElementById('chartDistance').getContext('2d');
+    var chartDistance = new Chart(ctxD, {
+      type: 'line',
+      data: {
+        labels: timePoints,
+        datasets: [{
+          label: 'Distance vs Time',
+          data: distance.slice(),
+          borderColor: 'blue',
+          fill: false,
+          pointRadius: 5,
+          pointHoverRadius: 7
+        }]
+      },
+      options: commonOptions
+    });
+    chartDistance.myType = 'distance';
+    
+    // Create the Velocity-Time chart.
+    var ctxV = document.getElementById('chartVelocity').getContext('2d');
+    var chartVelocity = new Chart(ctxV, {
+      type: 'line',
+      data: {
+        labels: timePoints,
+        datasets: [{
+          label: 'Velocity vs Time',
+          data: velocity.slice(),
+          borderColor: 'green',
+          fill: false,
+          pointRadius: 5,
+          pointHoverRadius: 7
+        }]
+      },
+      options: commonOptions
+    });
+    chartVelocity.myType = 'velocity';
+    
+    // Create the Acceleration-Time chart.
+    var ctxA = document.getElementById('chartAcceleration').getContext('2d');
+    var chartAcceleration = new Chart(ctxA, {
+      type: 'line',
+      data: {
+        labels: timePoints,
+        datasets: [{
+          label: 'Acceleration vs Time',
+          data: acceleration.slice(),
+          borderColor: 'red',
+          fill: false,
+          pointRadius: 5,
+          pointHoverRadius: 7
+        }]
+      },
+      options: commonOptions
+    });
+    chartAcceleration.myType = 'acceleration';
+    
+    // --- Control Panel Event Listeners ---
+    // Toggle between constant and exponential acceleration controls.
+    function toggleAccelerationControls() {
+      var model = document.querySelector('input[name="accModel"]:checked').value;
+      if (model === "constant") {
+        document.getElementById("constantAccelerationControls").style.display = "block";
+        document.getElementById("exponentialAccelerationControls").style.display = "none";
+      } else {
+        document.getElementById("constantAccelerationControls").style.display = "none";
+        document.getElementById("exponentialAccelerationControls").style.display = "block";
+      }
+      updateFromControls();
+    }
+    var accModelRadios = document.querySelectorAll('input[name="accModel"]');
+    accModelRadios.forEach(function(radio) {
+      radio.addEventListener("change", toggleAccelerationControls);
+    });
+    
+    // Synchronize constant acceleration slider with number input.
+    var accSlider = document.getElementById("accelerationSlider");
+    var accInput  = document.getElementById("accelerationInput");
+    accSlider.addEventListener("input", function() {
+      accInput.value = accSlider.value;
+      updateFromControls();
+    });
+    accInput.addEventListener("change", function() {
+      accSlider.value = accInput.value;
+      updateFromControls();
+    });
+    
+    // Synchronize exponential acceleration sliders.
+    var expAccSlider = document.getElementById("expAccSlider");
+    var expAccInput  = document.getElementById("expAccInput");
+    expAccSlider.addEventListener("input", function() {
+      expAccInput.value = expAccSlider.value;
+      updateFromControls();
+    });
+    expAccInput.addEventListener("change", function() {
+      expAccSlider.value = expAccInput.value;
+      updateFromControls();
+    });
+    var expFactorSlider = document.getElementById("expFactorSlider");
+    var expFactorInput  = document.getElementById("expFactorInput");
+    expFactorSlider.addEventListener("input", function() {
+      expFactorInput.value = expFactorSlider.value;
+      updateFromControls();
+    });
+    expFactorInput.addEventListener("change", function() {
+      expFactorSlider.value = expFactorInput.value;
+      updateFromControls();
+    });
+    
+    // Synchronize initial velocity controls.
+    var velSlider = document.getElementById("velocitySlider");
+    var velInput  = document.getElementById("velocityInput");
+    velSlider.addEventListener("input", function() {
+      velInput.value = velSlider.value;
+      updateFromControls();
+    });
+    velInput.addEventListener("change", function() {
+      velSlider.value = velInput.value;
+      updateFromControls();
+    });
+    
+    // Synchronize initial distance controls.
+    var distSlider = document.getElementById("distanceSlider");
+    var distInput  = document.getElementById("distanceInput");
+    distSlider.addEventListener("input", function() {
+      distInput.value = distSlider.value;
+      updateFromControls();
+    });
+    distInput.addEventListener("change", function() {
+      distSlider.value = distInput.value;
+      updateFromControls();
+    });
+    
+    // Initialize the graphs.
+    updateFromControls();
+  </script>
+</body>
+</html>
