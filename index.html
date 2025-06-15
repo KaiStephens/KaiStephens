@@ -3,22 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kai Stephens</title>
+  <title>Kai Stephens | Future Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap"
     rel="stylesheet"
   />
   <style>
 :root {
-  --primary: #FF3366;
-  --secondary: #00FFB2;
-  --accent: #FFD700;
-  --bg: #0a0a0a;
-  --text: #ffffff;
-  --text-dim: #888;
-  --border: rgba(255, 255, 255, 0.08);
+  --neon-cyan: #00ffff;
+  --neon-pink: #ff0080;
+  --neon-purple: #8000ff;
+  --neon-green: #00ff41;
+  --bg-dark: #000011;
+  --bg-darker: #000008;
+  --text-white: #ffffff;
+  --text-glow: #e0e0ff;
+  --glass: rgba(255, 255, 255, 0.05);
+  --border-glow: rgba(0, 255, 255, 0.3);
 }
 
 * {
@@ -28,34 +31,147 @@
 }
 
 body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Inter', sans-serif;
-  line-height: 1.6;
+  background: var(--bg-dark);
+  color: var(--text-white);
+  font-family: 'Rajdhani', sans-serif;
   overflow-x: hidden;
+  position: relative;
 }
 
-/* Navigation */
+/* Animated Background */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(255, 0, 128, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 60%, rgba(128, 0, 255, 0.05) 0%, transparent 50%);
+  animation: backgroundPulse 8s ease-in-out infinite;
+  z-index: -2;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(0,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+  animation: gridMove 20s linear infinite;
+  z-index: -1;
+}
+
+@keyframes backgroundPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+@keyframes gridMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(10px, 10px); }
+}
+
+/* Futuristic Navigation */
 .nav {
   position: fixed;
-  top: 2rem;
-  right: 2rem;
-  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 6rem;
+  height: 100vh;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 2rem;
+  z-index: 100;
+  background: linear-gradient(180deg, 
+    rgba(0, 255, 255, 0.1) 0%, 
+    rgba(128, 0, 255, 0.1) 50%, 
+    rgba(255, 0, 128, 0.1) 100%);
+  backdrop-filter: blur(15px);
+  border-right: 2px solid var(--border-glow);
+  box-shadow: 
+    inset 0 0 20px rgba(0, 255, 255, 0.1),
+    0 0 40px rgba(0, 255, 255, 0.2);
+}
+
+.nav::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, rgba(0, 255, 255, 0.05), transparent);
+  animation: navGlow 3s ease-in-out infinite;
+}
+
+@keyframes navGlow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
 }
 
 .nav-link {
-  color: var(--text-dim);
+  writing-mode: vertical-rl;
   text-decoration: none;
-  font-size: 0.9rem;
+  color: var(--text-glow);
+  font-family: 'Orbitron', monospace;
+  font-size: 0.8rem;
   font-weight: 500;
-  transition: color 0.3s ease;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 1.5rem 0.5rem;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border: 1px solid transparent;
+  border-radius: 8px;
+}
+
+.nav-link::before {
+  content: '';
+  position: absolute;
+  left: -2px;
+  top: 50%;
+  width: 4px;
+  height: 0;
+  background: linear-gradient(to bottom, var(--neon-cyan), var(--neon-pink));
+  transition: height 0.4s ease;
+  transform: translateY(-50%);
+  border-radius: 2px;
+  box-shadow: 0 0 10px var(--neon-cyan);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  border-radius: 8px;
+}
+
+.nav-link:hover::before,
+.nav-link[data-active="true"]::before {
+  height: 70%;
+}
+
+.nav-link:hover::after,
+.nav-link[data-active="true"]::after {
+  opacity: 1;
 }
 
 .nav-link:hover,
 .nav-link[data-active="true"] {
-  color: var(--primary);
+  color: var(--neon-cyan);
+  transform: translateX(10px);
+  text-shadow: 0 0 10px var(--neon-cyan);
+  border-color: rgba(0, 255, 255, 0.3);
 }
 
 /* Sections */
@@ -63,194 +179,502 @@ body {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 2rem;
+  padding: 4rem 2rem 4rem 8rem;
+  position: relative;
 }
 
-/* Home */
+/* Interactive Mouse Effect */
+.mouse-gradient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(0, 255, 255, 0.03) 0%,
+    rgba(255, 0, 128, 0.02) 30%,
+    transparent 60%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.section:hover .mouse-gradient {
+  opacity: 1;
+}
+
+/* Home Section */
 .home-content {
   text-align: center;
-  max-width: 600px;
+  max-width: 70rem;
+  margin: 0 auto;
+  position: relative;
 }
 
-.name {
-  font-family: 'Clash Display', sans-serif;
-  font-size: clamp(3rem, 8vw, 5rem);
-  font-weight: 700;
-  margin-bottom: 1rem;
-  background: linear-gradient(135deg, var(--primary), var(--accent), var(--secondary));
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: gradient 6s ease infinite;
+.greeting {
+  font-family: 'Orbitron', monospace;
+  font-size: 1rem;
+  color: var(--neon-green);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: glitchIn 2s ease forwards 0.5s;
+  text-shadow: 0 0 10px var(--neon-green);
 }
 
-@keyframes gradient {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+@keyframes glitchIn {
+  0% { opacity: 0; transform: translateX(-20px); }
+  10% { opacity: 1; transform: translateX(5px); }
+  20% { opacity: 0; transform: translateX(-5px); }
+  30% { opacity: 1; transform: translateX(0); }
+  100% { opacity: 1; transform: translateX(0); }
 }
 
-.title {
-  font-size: 1.1rem;
-  color: var(--text-dim);
+.name-container {
+  position: relative;
   margin-bottom: 2rem;
 }
 
-.cta {
-  display: inline-block;
-  padding: 0.8rem 2rem;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
-  color: white;
+.name-bg {
+  position: absolute;
+  inset: -4rem -8rem;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 255, 255, 0.2) 0%,
+    rgba(255, 0, 128, 0.15) 40%,
+    rgba(128, 0, 255, 0.1) 70%,
+    transparent 100%
+  );
+  filter: blur(80px);
+  animation: nameGlow 4s ease-in-out infinite;
+  border-radius: 50%;
+}
+
+@keyframes nameGlow {
+  0%, 100% { 
+    transform: scale(1) rotate(0deg); 
+    opacity: 0.8; 
+  }
+  50% { 
+    transform: scale(1.2) rotate(10deg); 
+    opacity: 1; 
+  }
+}
+
+.name {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(3rem, 10vw, 7rem);
+  font-weight: 900;
+  position: relative;
+  background: linear-gradient(
+    45deg,
+    var(--neon-cyan) 0%,
+    var(--neon-purple) 25%,
+    var(--neon-pink) 50%,
+    var(--neon-cyan) 75%,
+    var(--neon-green) 100%
+  );
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: hologramShift 3s ease-in-out infinite, textGlow 2s ease-in-out infinite;
+  text-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+  letter-spacing: 2px;
+  opacity: 0;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
+}
+
+.name::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 2px;
+  color: var(--neon-pink);
+  opacity: 0.7;
+  z-index: -1;
+  animation: glitch 0.3s ease-in-out infinite;
+}
+
+@keyframes hologramShift {
+  0% { 
+    background-position: 0% 50%; 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  25% { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+  50% { 
+    background-position: 100% 50%; 
+  }
+  100% { 
+    background-position: 0% 50%; 
+  }
+}
+
+@keyframes textGlow {
+  0%, 100% { text-shadow: 0 0 30px rgba(0, 255, 255, 0.5); }
+  50% { text-shadow: 0 0 50px rgba(255, 0, 128, 0.8); }
+}
+
+@keyframes glitch {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+}
+
+.subtitle {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.4rem;
+  color: var(--text-glow);
+  margin-bottom: 3rem;
+  opacity: 0;
+  animation: fadeInUp 1.5s ease forwards 1.5s;
+  text-shadow: 0 0 20px rgba(224, 224, 255, 0.3);
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 3rem;
+  background: linear-gradient(45deg, var(--neon-cyan), var(--neon-purple));
+  color: var(--bg-dark);
   text-decoration: none;
-  border-radius: 30px;
-  font-weight: 500;
-  transition: transform 0.3s ease;
+  border-radius: 50px;
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  border: 2px solid transparent;
+  box-shadow: 
+    0 0 20px rgba(0, 255, 255, 0.4),
+    inset 0 0 20px rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  animation: fadeInUp 1.5s ease forwards 2s;
 }
 
-.cta:hover {
-  transform: translateY(-2px);
-}
-
-/* Content sections */
-.content {
-  max-width: 800px;
+.cta-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
   width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.6s ease;
+}
+
+.cta-button:hover::before {
+  left: 100%;
+}
+
+.cta-button:hover {
+  transform: translateY(-5px);
+  box-shadow: 
+    0 10px 40px rgba(0, 255, 255, 0.6),
+    inset 0 0 30px rgba(255, 255, 255, 0.2);
+  border-color: var(--neon-cyan);
+}
+
+/* Experience & Projects */
+.content-container {
+  width: 100%;
+  max-width: 75rem;
+  margin: 0 auto;
 }
 
 .section-title {
-  font-family: 'Clash Display', sans-serif;
-  font-size: 2.5rem;
-  font-weight: 600;
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 700;
   text-align: center;
+  margin-bottom: 4rem;
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+  letter-spacing: 2px;
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+  box-shadow: 0 0 10px var(--neon-cyan);
+}
+
+.futuristic-card {
+  background: var(--glass);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border-glow);
+  border-radius: 20px;
+  padding: 3rem;
   margin-bottom: 3rem;
-  color: var(--text);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-.card {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 2rem;
-  margin-bottom: 1.5rem;
-  transition: all 0.3s ease;
+.futuristic-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink), var(--neon-purple));
+  transition: left 0.6s ease;
 }
 
-.card:hover {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 51, 102, 0.2);
-  transform: translateY(-2px);
+.futuristic-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.02), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.futuristic-card:hover::before {
+  left: 100%;
+}
+
+.futuristic-card:hover::after {
+  opacity: 1;
+}
+
+.futuristic-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  border-color: var(--neon-cyan);
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(0, 255, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .card-title {
-  font-family: 'Clash Display', sans-serif;
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: var(--primary);
-  margin-bottom: 0.3rem;
+  font-family: 'Orbitron', monospace;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 10px var(--neon-cyan);
+  letter-spacing: 1px;
 }
 
 .card-company {
-  color: var(--secondary);
+  color: var(--neon-green);
+  font-size: 1.2rem;
+  font-weight: 600;
   text-decoration: none;
-  font-weight: 500;
-  margin-bottom: 0.8rem;
-  display: block;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 10px var(--neon-green);
 }
 
 .card-company:hover {
-  color: var(--accent);
+  color: var(--neon-pink);
+  text-shadow: 0 0 15px var(--neon-pink);
+  transform: translateX(10px);
 }
 
 .card-description {
-  color: var(--text-dim);
-  margin-bottom: 1rem;
-  line-height: 1.5;
+  color: var(--text-glow);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  font-size: 1.1rem;
 }
 
-.tags {
+.tech-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 1rem;
 }
 
-.tag {
-  padding: 0.2rem 0.8rem;
-  background: rgba(255, 51, 102, 0.1);
-  color: var(--primary);
-  border-radius: 12px;
-  font-size: 0.8rem;
-  font-weight: 500;
+.tech-tag {
+  padding: 0.5rem 1.5rem;
+  background: rgba(0, 255, 255, 0.1);
+  color: var(--neon-cyan);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: 'Orbitron', monospace;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 5px var(--neon-cyan);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
 }
 
-/* Projects grid */
-.projects {
+.tech-tag:hover {
+  background: rgba(0, 255, 255, 0.2);
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+}
+
+/* Projects Grid */
+.projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 3rem;
 }
 
 .project-link {
-  color: var(--secondary);
+  color: var(--neon-purple);
   text-decoration: none;
-  font-weight: 500;
-  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: 'Orbitron', monospace;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 10px var(--neon-purple);
 }
 
 .project-link:hover {
-  color: var(--accent);
+  color: var(--neon-pink);
+  text-shadow: 0 0 15px var(--neon-pink);
+  transform: translateX(10px);
 }
 
 /* Contact */
+.contact-container {
+  max-width: 50rem;
+  text-align: center;
+}
+
 .contact-links {
   display: flex;
   justify-content: center;
-  gap: 2rem;
-  margin-top: 2rem;
+  gap: 3rem;
+  margin-top: 3rem;
 }
 
 .contact-link {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  color: var(--text-dim);
+  gap: 1rem;
+  color: var(--text-glow);
   text-decoration: none;
-  font-weight: 500;
-  padding: 0.6rem 1.2rem;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  transition: all 0.3s ease;
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-family: 'Orbitron', monospace;
+  padding: 1rem 2rem;
+  border: 2px solid var(--border-glow);
+  border-radius: 15px;
+  background: var(--glass);
+  backdrop-filter: blur(15px);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.contact-link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.contact-link:hover::before {
+  opacity: 1;
 }
 
 .contact-link:hover {
-  color: var(--primary);
-  border-color: rgba(255, 51, 102, 0.3);
+  color: var(--neon-cyan);
+  text-shadow: 0 0 15px var(--neon-cyan);
+  transform: translateY(-5px);
+  border-color: var(--neon-cyan);
+  box-shadow: 
+    0 15px 40px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(0, 255, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .icon {
-  width: 1.2rem;
-  height: 1.2rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  filter: drop-shadow(0 0 5px currentColor);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Mobile */
 @media (max-width: 768px) {
   .nav {
-    top: 1rem;
-    right: 1rem;
-    gap: 1.5rem;
+    width: 100%;
+    height: auto;
+    bottom: 0;
+    top: auto;
+    flex-direction: row;
+    padding: 1rem;
+    background: linear-gradient(90deg, 
+      rgba(0, 255, 255, 0.1) 0%, 
+      rgba(128, 0, 255, 0.1) 50%, 
+      rgba(255, 0, 128, 0.1) 100%);
+    border-top: 2px solid var(--border-glow);
+    border-right: none;
   }
-  
+
+  .nav-link {
+    writing-mode: initial;
+    padding: 1rem;
+    font-size: 0.7rem;
+  }
+
   .section {
-    padding: 1.5rem;
+    padding: 3rem 1.5rem;
   }
-  
+
   .contact-links {
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.5rem;
   }
-  
-  .projects {
+
+  .projects-grid {
     grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .name {
+    font-size: 3rem;
   }
 }
   </style>
@@ -264,156 +688,219 @@ body {
     <a href="#contact" class="nav-link">Contact</a>
   </nav>
 
-  <!-- Home -->
+  <!-- Home Section -->
   <section id="home" class="section">
     <div class="home-content">
-      <h1 class="name">Kai Stephens</h1>
-      <p class="title">Software Developer | CEO at Nipux Inc</p>
-      <a href="#contact" class="cta">Let's connect</a>
+      <div class="greeting">// Initialize_Developer</div>
+      <div class="name-container">
+        <div class="name-bg"></div>
+        <h1 class="name" data-text="KAI STEPHENS">KAI STEPHENS</h1>
+      </div>
+      <p class="subtitle">Software Developer | CEO at Nipux Inc</p>
+      <a href="#contact" class="cta-button">
+        <span>CONNECT</span>
+        <span>→</span>
+      </a>
     </div>
+    <div class="mouse-gradient"></div>
   </section>
 
-  <!-- Experience -->
+  <!-- Experience Section -->
   <section id="experience" class="section">
-    <div class="content">
-      <h2 class="section-title">Experience</h2>
+    <div class="content-container">
+      <h2 class="section-title">EXPERIENCE</h2>
       
-      <div class="card">
-        <h3 class="card-title">CEO & Founder</h3>
-        <a href="https://nipux.com" target="_blank" class="card-company">Nipux Inc</a>
+      <div class="futuristic-card">
+        <h3 class="card-title">CEO & FOUNDER</h3>
+        <a href="https://nipux.com" target="_blank" class="card-company">NIPUX INC</a>
         <p class="card-description">
-          Leading a server hosting company focused on reliable and scalable infrastructure solutions.
+          Leading a server hosting company focused on providing reliable and scalable infrastructure solutions. Building the future of cloud hosting with cutting-edge technology.
         </p>
-        <div class="tags">
-          <span class="tag">Leadership</span>
-          <span class="tag">Cloud Infrastructure</span>
-          <span class="tag">Business Development</span>
+        <div class="tech-tags">
+          <span class="tech-tag">Leadership</span>
+          <span class="tech-tag">Cloud Infrastructure</span>
+          <span class="tech-tag">Business Development</span>
+          <span class="tech-tag">Server Management</span>
         </div>
       </div>
       
-      <div class="card">
-        <h3 class="card-title">Software Developer</h3>
-        <a href="https://treefrog.com" target="_blank" class="card-company">TreeFrog Inc</a>
+      <div class="futuristic-card">
+        <h3 class="card-title">SOFTWARE DEVELOPER</h3>
+        <a href="https://treefrog.com" target="_blank" class="card-company">TREEFROG INC</a>
         <p class="card-description">
-          Developed innovative software solutions for client projects in Newmarket, Ontario.
+          Developed innovative software solutions and contributed to various client projects with a focus on web technologies and system architecture in Newmarket, Ontario.
         </p>
-        <div class="tags">
-          <span class="tag">Web Development</span>
-          <span class="tag">System Architecture</span>
-          <span class="tag">Client Solutions</span>
+        <div class="tech-tags">
+          <span class="tech-tag">Web Development</span>
+          <span class="tech-tag">System Architecture</span>
+          <span class="tech-tag">Client Solutions</span>
+          <span class="tech-tag">Team Collaboration</span>
         </div>
       </div>
     </div>
+    <div class="mouse-gradient"></div>
   </section>
 
-  <!-- Projects -->
+  <!-- Projects Section -->
   <section id="projects" class="section">
-    <div class="content">
-      <h2 class="section-title">Projects</h2>
-      <div class="projects">
+    <div class="content-container">
+      <h2 class="section-title">PROJECTS</h2>
+      <div class="projects-grid">
         
-        <div class="card">
-          <h3 class="card-title">Auto Robot Navigator</h3>
+        <div class="futuristic-card">
+          <h3 class="card-title">AUTO ROBOT NAVIGATOR</h3>
           <p class="card-description">
-            Autonomous robot navigation using computer vision and Bluetooth control.
+            Autonomous robot navigation system using computer vision and Bluetooth control. Features real-time perspective correction, color-based detection, and precise movement calculations.
           </p>
           <a href="https://github.com/KaiStephens/autoRobot" target="_blank" class="project-link">
-            View on GitHub →
+            VIEW PROJECT →
           </a>
         </div>
 
-        <div class="card">
-          <h3 class="card-title">Echo Notes</h3>
+        <div class="futuristic-card">
+          <h3 class="card-title">ECHO NOTES</h3>
           <p class="card-description">
-            AI-powered lecture recording and summarization with Whisper integration.
+            AI-powered lecture recording and summarization tool with advanced transcription using Whisper and OpenAI integration for intelligent content processing.
           </p>
           <a href="https://github.com/KaiStephens/echonotes" target="_blank" class="project-link">
-            View on GitHub →
+            VIEW PROJECT →
           </a>
         </div>
 
-        <div class="card">
-          <h3 class="card-title">Personal Jarvis</h3>
+        <div class="futuristic-card">
+          <h3 class="card-title">PERSONAL JARVIS</h3>
           <p class="card-description">
-            AI assistant with wake word detection and natural conversation.
+            Advanced AI assistant with wake word detection, weather updates, and natural conversation capabilities. Features ElevenLabs TTS integration.
           </p>
           <a href="https://github.com/KaiStephens/personalJarvis" target="_blank" class="project-link">
-            View on GitHub →
+            VIEW PROJECT →
           </a>
         </div>
 
-        <div class="card">
-          <h3 class="card-title">TeachAssist Scraper</h3>
+        <div class="futuristic-card">
+          <h3 class="card-title">TEACHASSIST SCRAPER</h3>
           <p class="card-description">
-            YRDSB mark fetcher with AI teaching assistant integration.
+            YRDSB mark fetcher with AI teaching assistant integration. Flask-based web application powered by Google GenAI for educational support.
           </p>
           <a href="https://github.com/KaiStephens/TeachAssistScraper" target="_blank" class="project-link">
-            View on GitHub →
+            VIEW PROJECT →
           </a>
         </div>
 
       </div>
     </div>
+    <div class="mouse-gradient"></div>
   </section>
 
-  <!-- Contact -->
+  <!-- Contact Section -->
   <section id="contact" class="section">
-    <div class="content">
-      <h2 class="section-title">Let's Connect</h2>
+    <div class="contact-container">
+      <h2 class="section-title">INITIALIZE_CONTACT</h2>
       <div class="contact-links">
         <a href="mailto:kai@kaios.ca" class="contact-link">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
             <polyline points="22,6 12,13 2,6"></polyline>
           </svg>
-          Email
+          <span>Email</span>
         </a>
         <a href="https://github.com/KaiStephens" target="_blank" class="contact-link">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
           </svg>
-          GitHub
+          <span>GitHub</span>
         </a>
         <a href="https://twitter.com/kaiostephens" target="_blank" class="contact-link">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
           </svg>
-          Twitter
+          <span>Twitter</span>
         </a>
       </div>
     </div>
+    <div class="mouse-gradient"></div>
   </section>
 
   <script>
-    // Simple smooth scrolling
     document.addEventListener('DOMContentLoaded', () => {
-      const links = document.querySelectorAll('a[href^="#"]');
+      // Enhanced mouse tracking
+      const root = document.documentElement;
+      let isThrottled = false;
+      
+      const updateMousePosition = (e) => {
+        if (isThrottled) return;
+        isThrottled = true;
+        
+        requestAnimationFrame(() => {
+          const x = e.clientX;
+          const y = e.clientY;
+          const xPercent = (x / window.innerWidth) * 100;
+          const yPercent = (y / window.innerHeight) * 100;
+          
+          root.style.setProperty('--mouse-x', `${xPercent}%`);
+          root.style.setProperty('--mouse-y', `${yPercent}%`);
+          
+          isThrottled = false;
+        });
+      };
+
+      document.addEventListener('mousemove', updateMousePosition);
+
+      // Smooth scrolling navigation
       const sections = document.querySelectorAll('.section');
       const navLinks = document.querySelectorAll('.nav-link');
 
-      // Smooth scroll
-      links.forEach(link => {
-        link.addEventListener('click', (e) => {
-          e.preventDefault();
-          const target = document.querySelector(link.getAttribute('href'));
-          target?.scrollIntoView({ behavior: 'smooth' });
-        });
-      });
+      const updateActiveSection = () => {
+        const scrollPosition = window.scrollY + window.innerHeight / 2;
 
-      // Active nav
-      const updateNav = () => {
-        const scrollPos = window.scrollY + window.innerHeight / 2;
         sections.forEach((section, index) => {
-          const { offsetTop, offsetHeight } = section;
-          if (scrollPos >= offsetTop && scrollPos < offsetTop + offsetHeight) {
-            navLinks.forEach(nav => nav.setAttribute('data-active', 'false'));
-            navLinks[index]?.setAttribute('data-active', 'true');
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.offsetHeight;
+
+          if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            navLinks.forEach(link => link.setAttribute('data-active', 'false'));
+            if (navLinks[index]) {
+              navLinks[index].setAttribute('data-active', 'true');
+            }
           }
         });
       };
 
-      window.addEventListener('scroll', updateNav);
-      updateNav();
+      window.addEventListener('scroll', updateActiveSection);
+      updateActiveSection();
+
+      navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute('href');
+          const targetSection = document.querySelector(targetId);
+
+          if (targetSection) {
+            targetSection.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+
+      // Intersection Observer for cards
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.animationPlayState = 'running';
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.futuristic-card').forEach(card => {
+        observer.observe(card);
+      });
     });
   </script>
 </body>
