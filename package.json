@@ -1,0 +1,16 @@
+{
+  "name": "kai-stephens-portfolio",
+  "version": "1.0.0",
+  "description": "Personal portfolio website for Kai Stephens",
+  "main": "index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "keywords": ["portfolio", "cloudflare", "workers"],
+  "author": "Kai Stephens",
+  "license": "MIT",
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}

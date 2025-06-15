@@ -1,4 +1,12 @@
-<!DOCTYPE html>
+addEventListener('fetch', event => {
+  event.respondWith(handleRequest(event.request))
+})
+
+async function handleRequest(request) {
+  const url = new URL(request.url)
+  
+  // Serve the main HTML file for all requests
+  const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -102,7 +110,7 @@ body {
 
 .title {
   font-family: var(--font-clash);
-  font-size: 7rem; /* increased from 6rem */
+  font-size: 7rem;
   font-weight: bold;
   margin-bottom: 1.5rem;
   position: relative;
@@ -142,7 +150,7 @@ body {
 .subtitle {
   font-size: 1.125rem;
   color: var(--foreground-60);
-  max-width: 28rem;
+  max-width: 40rem;
   margin: 0 auto;
   opacity: 0;
   animation: fadeIn 1.2s ease forwards 0.5s;
@@ -452,7 +460,9 @@ body {
 }
   </style>
 </head>
-<body>
+<body>`
+
+  return new Response(html + `
   <!-- Navigation -->
   <nav class="nav">
     <a href="#home" class="nav-link" data-active="true">Home</a>
@@ -619,34 +629,12 @@ body {
         </div>
       </div>
       
-      <!-- New Project: Physics Visualizer -->
-      <div class="project">
-        <div class="project-dot"></div>
-        <h2 class="project-title">Physics Visualizer</h2>
-        <p class="project-description">
-          An interactive physics simulation that demonstrates various physical phenomena. Visit <a href="https://kaios.ca/physicsVisualizer" target="_blank" rel="noopener noreferrer" style="color: var(--primary); text-decoration: underline;">kaios.ca/physicsVisualizer</a> to try it live.
-        </p>
-        <div class="project-tech">
-          <span class="tech-tag">HTML</span>
-          <span class="tech-tag">CSS</span>
-          <span class="tech-tag">JavaScript</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/KaiStephens/KaiStephens/blob/main/physicsVisualizer.html" target="_blank" rel="noopener noreferrer" class="project-link">
-            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-            </svg>
-          </a>
-        </div>
-      </div>
-      
       <!-- New Project: TeachAssistScraper -->
       <div class="project">
         <div class="project-dot"></div>
         <h2 class="project-title">TeachAssistScraper</h2>
         <p class="project-description">
-          YRDSB Mark Fetcher &amp; Teaching Assistant AI – a Flask-based web application that lets students log in with their YRDSB credentials to fetch current and midterm marks, view detailed assignment reports, and chat with an AI teaching assistant powered by Google GenAI.
+          YRDSB Mark Fetcher & Teaching Assistant AI – a Flask-based web application that lets students log in with their YRDSB credentials to fetch current and midterm marks, view detailed assignment reports, and chat with an AI teaching assistant powered by Google GenAI.
         </p>
         <div class="project-tech">
           <span class="tech-tag">Python</span>
@@ -722,14 +710,14 @@ body {
         const y = e.clientY;
         const xPercent = (x / window.innerWidth) * 100;
         const yPercent = (y / window.innerHeight) * 100;
-        root.style.setProperty('--mouse-x', `${xPercent}%`);
-        root.style.setProperty('--mouse-y', `${yPercent}%`);
+        root.style.setProperty('--mouse-x', \`\${xPercent}%\`);
+        root.style.setProperty('--mouse-y', \`\${yPercent}%\`);
     
         const content = document.querySelector('.content');
         if (content) {
           const moveX = (x - window.innerWidth / 2) * 0.03;
           const moveY = (y - window.innerHeight / 2) * 0.03;
-          content.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
+          content.style.transform = \`translate3d(\${moveX}px, \${moveY}px, 0)\`;
         }
       };
     
@@ -812,7 +800,7 @@ body {
       const contactObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => {
           if (entry.isIntersecting) {
-            entry.target.style.animation = `fadeInUp 0.8s ease forwards ${index * 0.1}s`;
+            entry.target.style.animation = \`fadeInUp 0.8s ease forwards \${index * 0.1}s\`;
           }
         });
       }, observerOptions);
@@ -823,4 +811,10 @@ body {
     });
   </script>
 </body>
-</html>
+</html>`, {
+    headers: {
+      'content-type': 'text/html;charset=UTF-8',
+      'cache-control': 'public, max-age=3600',
+    },
+  })
+}

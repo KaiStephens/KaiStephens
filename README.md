@@ -1,20 +1,46 @@
-# Random Projects
+# Kai Stephens - Portfolio
 
-This repository contains a collection of small projects that don't warrant their own dedicated repository. Each project serves as a fun, experimental idea or a way to practice certain skills.
+A clean, modern portfolio website showcasing my work as a software developer and CEO of Nipux Inc.
 
----
+## Features
 
-## Projects
+- Responsive design that works on all devices
+- Smooth animations and interactive elements
+- Professional experience highlighting TreeFrog Inc and Nipux Inc
+- Project showcase with GitHub links
+- Contact information
 
-###  Birthday Checker
-A Python script to help you keep track of important birthdays.
+## Deployment to Cloudflare Workers
 
-- Add birthdays directly to the Python file.
-- If you're using Linux, you can integrate a `notify.sh` script to display notifications.
-- Optionally, set the script to run on startup for daily reminders.
+This project is configured for deployment to Cloudflare Workers.
 
-###  Tower Defense Game
-A simple tower defense game built to practice HTML and basic web development.
+### Prerequisites
 
-- Fun and functional example of a small game project.
-- 90% of it is hard coded and does not work on some screen resolutions
+- Node.js installed
+- Cloudflare account
+- Wrangler CLI installed globally: `npm install -g wrangler`
+
+### Setup
+
+1. Clone this repository
+2. Install dependencies: `npm install`
+3. Login to Cloudflare: `wrangler login`
+4. Deploy: `npm run deploy`
+
+### Local Development
+
+Run the development server: `npm run dev`
+
+## Tech Stack
+
+- HTML5/CSS3 with modern features
+- Vanilla JavaScript for interactivity
+- Cloudflare Workers for hosting
+- Google Fonts (Clash Display & Space Grotesk)
+
+## Contact
+
+- Email: kai@kaios.ca
+- GitHub: [@KaiStephens](https://github.com/KaiStephens)
+- Twitter: [@kaiostephens](https://twitter.com/kaiostephens)
+- Website: [nipux.com](https://nipux.com)
