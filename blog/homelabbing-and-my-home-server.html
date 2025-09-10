@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Is Homelabbing? Inside My Personal Home Server - Kai Stephens</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        header {
+            padding: 80px 0 60px;
+            border-bottom: 1px solid #222222;
+            margin-bottom: 80px;
+        }
+
+        .back-link {
+            color: #888888;
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 40px;
+            display: inline-block;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #ffffff;
+        }
+
+        .post-meta {
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 20px;
+        }
+
+        .post-subtitle {
+            font-size: 16px;
+            color: #888888;
+            font-style: italic;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 300;
+            letter-spacing: -1px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        h2 {
+            font-size: 32px;
+            font-weight: 300;
+            margin: 60px 0 30px;
+            color: #ffffff;
+        }
+
+        h3 {
+            font-size: 24px;
+            font-weight: 300;
+            margin: 40px 0 20px;
+            color: #ffffff;
+        }
+
+        h4 {
+            font-size: 20px;
+            font-weight: 300;
+            margin: 30px 0 15px;
+            color: #ffffff;
+        }
+
+        p {
+            margin-bottom: 30px;
+            color: #cccccc;
+            font-size: 18px;
+        }
+
+        ul, ol {
+            margin-bottom: 30px;
+            padding-left: 20px;
+        }
+
+        li {
+            color: #cccccc;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        blockquote {
+            border-left: 2px solid #333333;
+            padding-left: 30px;
+            margin: 40px 0;
+            color: #999999;
+            font-style: italic;
+            font-size: 20px;
+        }
+
+        .highlight {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border-left: 3px solid #444444;
+        }
+
+        .highlight p {
+            margin-bottom: 15px;
+        }
+
+        .highlight p:last-child {
+            margin-bottom: 0;
+        }
+
+        .spec-table {
+            background: #111111;
+            border-radius: 8px;
+            padding: 30px;
+            margin: 40px 0;
+            overflow-x: auto;
+        }
+
+        .spec-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .spec-table th,
+        .spec-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #333333;
+            color: #cccccc;
+        }
+
+        .spec-table th {
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .author {
+            border-top: 1px solid #222222;
+            padding-top: 60px;
+            margin-top: 100px;
+            color: #666666;
+            font-size: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+            
+            h1 {
+                font-size: 36px;
+            }
+
+            h2 {
+                font-size: 28px;
+            }
+
+            h3 {
+                font-size: 22px;
+            }
+
+            p, li {
+                font-size: 16px;
+            }
+
+            .spec-table {
+                padding: 20px;
+            }
+        }
+    </style>
+    <meta name="description" content="A practical guide to homelabbing and a detailed look at my personal home server setup, including hardware, services, networking, and lessons learned.">
+    <meta name="author" content="Kai Stephens">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="../index.html" class="back-link">← Back</a>
+            <div class="post-meta">July 15, 2025</div>
+            <h1>What Is Homelabbing? Inside My Personal Home Server</h1>
+            <p class="post-subtitle">Why I run my own hardware and what it powers every day.</p>
+        </header>
+
+        <main>
+            <h2>1 · What Is Homelabbing?</h2>
+            <p>Homelabbing is the practice of building and running your own infrastructure at home—servers, storage, networking, and services. It can be as small as a dusty old PC you rescued from a closet, or as big as a dedicated 42U rack humming in the corner of a basement. The scale doesn’t matter; the spirit does.</p>
+            <p>At its best, a homelab is equal parts learning environment and playground. You will break things, fix them, and then rebuild them cleaner. You’ll discover the difference between “it runs” and “it runs reliably.” And you’ll ship real services that you and your family use every day—media, backups, automation, AI, and more.</p>
+            <div class="highlight">
+                <p><strong>Real talk</strong>: Homelabbing is mainly for fun. If you don’t feel excitement (and a little bit of fright) at the idea of running your own home server, it might not be for you—and that’s okay.</p>
+            </div>
+
+            <h2>2 · What A Homelab Can Be</h2>
+            <p>A homelab is not a single blueprint. It ranges from a single mini‑PC running a handful of containers to a full rack with virtualization, high‑availability storage, and segmented networking. You need almost no money to start. Many people bootstrap with free or cheap parts from local sellers on Facebook Marketplace or Kijiji, then iterate as their needs grow.</p>
+            <ul>
+                <li><strong>Entry level</strong> — Old desktop or small form‑factor PC; 8–16GB RAM; a single SSD; runs Docker and a reverse proxy.</li>
+                <li><strong>Intermediate</strong> — Dedicated server chassis or NAS; 32–64GB RAM; mirrored storage; VLANs for isolation; a few VMs.</li>
+                <li><strong>Advanced</strong> — 42U rack; UPS and PDU; 10Gb networking; GPU(s) for AI; ZFS pools with snapshots and off‑site replication; full observability.</li>
+            </ul>
+            <p>What you run is limited only by your curiosity: full automations with n8n, your own VPN, self‑hosted music and movies, private DNS, password managers, tooling for development and CI, personal AI clusters, and more. Some of these services will be experiments you retire; others will become “production” for your home.</p>
+
+            <h2>3 · My Home Server Hardware</h2>
+            <div class="spec-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Model</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>CPU</td>
+                            <td>AMD Ryzen 9 7900X</td>
+                            <td>12 cores / 24 threads; strong single‑ and multi‑core for AI + VMs</td>
+                        </tr>
+                        <tr>
+                            <td>GPU #1</td>
+                            <td>NVIDIA GeForce RTX 5060 Ti 16GB</td>
+                            <td>Primary inference GPU for local LLMs and image models</td>
+                        </tr>
+                        <tr>
+                            <td>GPU #2</td>
+                            <td>AMD Radeon 9060 XT 16GB</td>
+                            <td>Secondary GPU for experiments and offloading compatible workloads</td>
+                        </tr>
+                        <tr>
+                            <td>Memory</td>
+                            <td>96GB DDR5</td>
+                            <td>Plenty of headroom for containers, VMs, and bigger context windows</td>
+                        </tr>
+                        <tr>
+                            <td>Storage (aggregate)</td>
+                            <td>~5TB across hosts + NAS</td>
+                            <td>Mix of NVMe and SSD; NAS for bulk storage + backups</td>
+                        </tr>
+                        <tr>
+                            <td>Networking</td>
+                            <td>1GbE switch</td>
+                            <td>Core switch for homelab; upgrade path to 2.5/10GbE</td>
+                        </tr>
+                        <tr>
+                            <td>Power</td>
+                            <td>850W PSU + UPS</td>
+                            <td>Headroom for dual‑GPU and safe shutdown on power loss</td>
+                        </tr>
+                        <tr>
+                            <td>Edge/IoT</td>
+                            <td>2× Raspberry Pi</td>
+                            <td>Lightweight services, sensors, and remote nodes</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="highlight">
+                <p><strong>Diagram</strong>: High‑level flow of my homelab networking and services.</p>
+                <p style="margin-bottom:0"><img src="photos/homelab-flow.png" alt="Homelab flow diagram" style="width:100%;max-width:100%;border-radius:8px;border:1px solid #333333"></p>
+            </div>
+
+            <h2>4 · What It Runs</h2>
+            <p>This is the core set I run day‑to‑day. The rest comes and goes as experiments.</p>
+            <ul>
+                <li><strong>Private AI</strong> — Local LLMs and image models with a lightweight router for prompt‑type handoff. <em>(present)</em></li>
+                <li><strong>Media</strong> — Jellyfin with automated libraries (Radarr/Sonarr) behind a hardened reverse proxy. <em>(present)</em></li>
+                <li><strong>Storage</strong> — ZFS datasets with snapshots and encrypted off‑site replication to the NAS/remote. <em>(present)</em></li>
+                <li><strong>Dev</strong> — Gitea + CI runners and a small container registry for projects. <em>(present)</em></li>
+                <li><strong>Home</strong> — Home Assistant with sensors/bridges and dashboards. <em>(present)</em></li>
+            </ul>
+
+            <h2>5 · Networking & Security</h2>
+            <p>Everything is containerized and segmented with VLANs: <em>LAN‑Core</em> for infra, <em>Media</em> for streaming, <em>IoT</em> for untrusted devices. Public exposure rides through a reverse proxy with mTLS for admin apps, SSO where possible, Tailscale/WireGuard for remote access, and fail2ban on ingress. DNS is split‑horizon: internal <code>*.home</code> resolves locally; public subdomains are proxied and rate‑limited. Secrets live in environment‑specific stores and are rotated on a schedule.</p>
+
+            
+        </main>
+
+        <footer class="author">
+            <p>Written by Kai Stephens</p>
+        </footer>
+    </div>
+</body>
+</html>
+
