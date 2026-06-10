@@ -1,43 +1,80 @@
 # Kai Stephens
 
-Software developer and founder building practical web products, automation tools, and clean digital experiences.
+Computer science learner, software developer, and founder building practical web products, automation tools, and infrastructure projects.
 
-I care about shipping work that feels fast, useful, and polished. My projects usually sit at the intersection of frontend detail, backend reliability, and product strategy.
+## Assignment Links
 
-## Current Focus
+- GitHub profile: [github.com/KaiStephens](https://github.com/KaiStephens)
+- Portfolio website: [kaios.ca](https://kaios.ca)
+- Portfolio source: [KaiStephens/KaiStephens](https://github.com/KaiStephens/KaiStephens)
+- Reflection: [REFLECTION.md](https://github.com/KaiStephens/KaiStephens/blob/main/REFLECTION.md)
 
-- Building products and systems through [Nipux Inc.](https://nipux.com)
-- Designing responsive web experiences and developer-friendly tools
-- Working with JavaScript, Cloudflare Workers, and modern web deployment
-- Turning ideas into usable products with clean UI and straightforward architecture
+## About Me
 
-## Tech I Use
+I am interested in computer science because I like building tools that solve real problems and make technology easier to use. I am currently developing my skills in web development, Python, JavaScript, AI tools, cloud infrastructure, and automation. I enjoy projects that combine software with practical outcomes, such as robotics, study tools, personal assistants, and dashboards. I am considering a future pathway in computer science, software engineering, or another technology-focused program where I can keep building larger systems. I like solving problems that require both technical debugging and clear product thinking.
 
-<p>
-  <img alt="HTML5" src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
-  <img alt="CSS3" src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
-  <img alt="JavaScript" src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=111111" />
-  <img alt="Node.js" src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" />
-  <img alt="React" src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
-  <img alt="Cloudflare" src="https://img.shields.io/badge/Cloudflare-F38020?style=for-the-badge&logo=cloudflare&logoColor=white" />
-</p>
+## Skills
 
-## What I Like Building
+- **Python:** I used Python in projects such as Echo Notes, Personal Jarvis, TeachAssist Scraper, and Auto Robot Navigator for automation, APIs, audio processing, and hardware control.
+- **HTML/CSS:** I used HTML and CSS to build and organize my portfolio website with clear sections, navigation, and responsive layout.
+- **JavaScript:** I use JavaScript for interactive web behavior and Cloudflare Worker code that serves web content.
+- **Flask:** I used Flask in TeachAssist Scraper to build a web application that displays student mark data and connects to an AI assistant.
+- **OpenCV / Computer Vision:** I used OpenCV in Auto Robot Navigator to detect colored markers, correct camera perspective, and guide robot movement.
+- **GitHub:** I use GitHub to organize repositories, document projects with README files, and publish my portfolio work.
+- **AI API Integration:** I have worked with AI-powered transcription, summarization, teaching assistant, and voice assistant features.
+- **Debugging and Problem Solving:** I practice breaking larger technical problems into smaller steps, testing each part, and improving the result over time.
 
-- Web apps with clear interfaces and strong performance
-- Automation that removes repetitive work
-- Lightweight deployment workflows
-- Products that move quickly from idea to usable release
+## Current Learning Goals
 
-## GitHub Stats
+- Improve my full-stack web development skills by building larger projects with cleaner structure.
+- Learn more about AI, automation, and private infrastructure.
+- Keep improving my GitHub documentation with screenshots, demos, and clearer explanations.
 
-<p>
-  <img height="165" src="https://github-readme-stats.vercel.app/api?username=KaiStephens&show_icons=true&hide_border=true&theme=transparent" alt="Kai Stephens GitHub stats" />
-  <img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=KaiStephens&layout=compact&hide_border=true&theme=transparent" alt="Top languages" />
-</p>
+## Project Showcase
+
+### Auto Robot Navigator
+
+- **Description:** An autonomous robot navigation system that uses a live camera feed, computer vision, perspective correction, and Bluetooth control to guide a robot toward a target.
+- **Tools and concepts:** Python, OpenCV, HSV color filtering, homography, Bluetooth, ESP32, robotics.
+- **What I did:** I built the software pipeline for camera capture, point selection, marker detection, orientation calculation, and motor command output.
+- **Challenge:** The hardest part was making visual detection reliable enough for movement decisions because camera angle, lighting, and marker position can change the result.
+- **Next improvement:** I would improve calibration, add more robust target selection, and include a clearer demo video or setup guide.
+- **Evidence:** [View project](https://github.com/KaiStephens/autoRobot)
+
+### Echo Notes
+
+- **Description:** A lecture recording and summarization tool that records audio, transcribes it, and creates AI-generated summaries for easier studying.
+- **Tools and concepts:** Python, OpenAI API, Whisper, PyAudio, pydub, transcription, summarization.
+- **What I did:** I built a workflow that records audio, processes it, sends it through transcription and summarization, and saves the result in an organized file.
+- **Challenge:** Audio dependencies, file size limits, and API cost made it important to support both cloud transcription and local Whisper.
+- **Next improvement:** I would add a cleaner interface, better error handling, and options for organizing summaries by course or topic.
+- **Evidence:** [View project](https://github.com/KaiStephens/echonotes)
+
+### Personal Jarvis
+
+- **Description:** A voice-based AI assistant with wake word detection, speech recognition, text-to-speech, weather updates, and scheduled messages.
+- **Tools and concepts:** Python, speech recognition, text-to-speech, APIs, weather data, automation.
+- **What I did:** I connected voice input, AI responses, TTS playback, and scheduled tasks into one assistant workflow.
+- **Challenge:** The challenge was making several APIs and audio features work together reliably in a real-time assistant.
+- **Next improvement:** I would improve privacy controls, local processing, and long-running reliability.
+- **Evidence:** [View project](https://github.com/KaiStephens/personalJarvis)
+
+### TeachAssist Scraper
+
+- **Description:** A Flask web application that fetches mark information, displays detailed reports, and adds an AI teaching assistant for questions about the data.
+- **Tools and concepts:** Python, Flask, requests, BeautifulSoup, JSON storage, Google GenAI, sessions.
+- **What I did:** I built the web app flow for fetching data, parsing pages, displaying results, and connecting the data to an AI assistant.
+- **Challenge:** The main challenge was handling login/session behavior and parsing web data safely and consistently.
+- **Next improvement:** I would strengthen security, avoid storing sensitive information, and make the interface easier to use.
+- **Evidence:** [View project](https://github.com/KaiStephens/TeachAssistScraper)
+
+## Privacy and Safety
+
+This portfolio avoids sharing private information such as phone number, home address, full birthday, student number, passwords, or private school documents.
 
 ## Connect
 
-- Website: [nipux.com](https://nipux.com)
+- Website: [kaios.ca](https://kaios.ca)
+- Company: [nipux.com](https://nipux.com)
 - GitHub: [@KaiStephens](https://github.com/KaiStephens)
 - Twitter/X: [@kaiostephens](https://twitter.com/kaiostephens)
