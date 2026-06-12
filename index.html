@@ -3,299 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kai Stephens builds software, local AI systems, infrastructure, and open-source models.">
     <title>Kai Stephens</title>
     <style>
+        :root {
+            color-scheme: light;
+            --background: #f8f7f3;
+            --text: #171717;
+            --muted: #68645d;
+            --rule: #d8d3c8;
+            --link: #163f88;
+        }
+
         * {
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #0a0a0a;
-            color: #ffffff;
-            line-height: 1.6;
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 40px;
-        }
-
-        /* Header */
-        header {
-            padding: 80px 0 0;
-            margin-bottom: 120px;
-        }
-
-        .name {
-            font-size: 64px;
-            font-weight: 300;
-            letter-spacing: -2px;
-            margin-bottom: 20px;
-            background: linear-gradient(45deg, #ffffff, #888888);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-        }
-
-        .title {
-            font-size: 20px;
-            font-weight: 400;
-            color: #666666;
-            margin-bottom: 60px;
-        }
-
-        nav {
-            display: flex;
-            gap: 40px;
-        }
-
-        nav a {
-            color: #888888;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 300;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        nav a:hover {
-            color: #ffffff;
-        }
-
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: #ffffff;
-            transition: width 0.3s ease;
-        }
-
-        nav a:hover::after {
-            width: 100%;
-        }
-
-        /* Sections */
-        .section {
-            margin-bottom: 120px;
-        }
-
-        .section-title {
-            font-size: 32px;
-            font-weight: 300;
-            margin-bottom: 60px;
-            color: #ffffff;
-        }
-
-        /* About */
-        .about p {
+            margin: 0;
+            background: var(--background);
+            color: var(--text);
+            font-family: Georgia, "Times New Roman", serif;
             font-size: 18px;
-            line-height: 1.8;
-            color: #cccccc;
-            margin-bottom: 30px;
+            line-height: 1.65;
         }
 
-        .about a {
-            color: #ffffff;
-            text-decoration: none;
-            border-bottom: 1px solid #333333;
-            transition: border-color 0.3s ease;
+        .page {
+            width: min(720px, calc(100% - 40px));
+            margin: 0 auto;
+            padding: 56px 0 72px;
         }
 
-        .about a:hover {
-            border-bottom-color: #ffffff;
-        }
-
-        /* Blog */
-        .blog-post {
-            padding: 40px 0;
-            border-bottom: 1px solid #222222;
-        }
-
-        .blog-post:last-child {
-            border-bottom: none;
-        }
-
-        .blog-post h3 {
-            font-size: 24px;
-            font-weight: 300;
-            margin-bottom: 10px;
-        }
-
-        .blog-post h3 a {
-            color: #ffffff;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .blog-post h3 a:hover {
-            color: #cccccc;
-        }
-
-        .blog-meta {
-            font-size: 14px;
-            color: #666666;
-            margin-bottom: 20px;
-        }
-
-        .blog-excerpt {
-            font-size: 16px;
-            color: #999999;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .read-more {
-            color: #888888;
-            text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s ease;
-        }
-
-        .read-more:hover {
-            color: #ffffff;
-        }
-
-        /* Contact */
-        .contact-links {
+        header {
             display: flex;
-            gap: 40px;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 24px;
+            padding-bottom: 48px;
         }
 
-        .contact-links a {
-            color: #888888;
-            text-decoration: none;
+        h1,
+        h2,
+        p,
+        ul {
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 22px;
+            font-weight: 500;
+            letter-spacing: 0;
+        }
+
+        h2 {
+            margin-top: 44px;
+            margin-bottom: 16px;
+            font-size: 20px;
+            font-weight: 500;
+            letter-spacing: 0;
+        }
+
+        p + p {
+            margin-top: 18px;
+        }
+
+        a {
+            color: var(--link);
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+        }
+
+        a:hover {
+            color: var(--text);
+        }
+
+        .intro {
+            max-width: 690px;
+        }
+
+        .links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 20px;
+            margin-top: 22px;
+            color: var(--muted);
             font-size: 16px;
-            transition: color 0.3s ease;
         }
 
-        .contact-links a:hover {
-            color: #ffffff;
+        .writing-list {
+            list-style: none;
+            padding: 0;
+            border-top: 1px solid var(--rule);
         }
 
-        /* Footer */
-        footer {
-            padding: 80px 0 40px;
-            text-align: center;
-            color: #666666;
-            font-size: 14px;
+        .writing-list li {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 16px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--rule);
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 20px;
+        .meta {
+            color: var(--muted);
+            font-size: 15px;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                font-size: 17px;
             }
 
-            .name {
-                font-size: 48px;
-            }
-
-            .title {
-                font-size: 18px;
-            }
-
-            nav {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .contact-links {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .section {
-                margin-bottom: 80px;
+            .page {
+                width: min(100% - 32px, 720px);
+                padding-top: 36px;
             }
 
             header {
-                margin-bottom: 80px;
+                padding-bottom: 36px;
+            }
+
+            .writing-list li {
+                grid-template-columns: 1fr;
+                gap: 2px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="page">
         <header>
-            <h1 class="name">Kai Stephens</h1>
-            <p class="title">Software Developer & CEO</p>
-            <nav>
-                <a href="#about">About</a>
-                <a href="#writing">Writing</a>
-                <a href="#contact">Contact</a>
-            </nav>
+            <h1>Kai Stephens</h1>
         </header>
 
         <main>
-            <section id="about" class="section">
-                <h2 class="section-title">About</h2>
-                <div class="about">
-                    <p>I build software and lead teams. Currently CEO at <a href="https://nipux.com">Nipux Inc</a>, previously at <a href="https://treefrog.com">Treefrog Inc</a>.</p>
-                </div>
-            </section>
+            <section class="intro" aria-label="Summary">
+                <p>I build software, local AI systems, and infrastructure. I climbed Kilimanjaro at 15, started <a href="https://nipux.com">Nipux</a>, and worked at <a href="https://treefrog.com">Treefrog Inc.</a> as a software developer.</p>
+                <p>I open-source models on <a href="https://huggingface.co/kai-os">Hugging Face</a> that have surpassed half a million downloads, share work with 20k+ people on X, and keep building practical tools across automation, robotics, study software, and private AI.</p>
 
-            <section id="writing" class="section">
-                <h2 class="section-title">Writing</h2>
-                <div class="blog-posts">
-                    <article class="blog-post">
-                        <h3><a href="blog/how-to-survive-ai.html">How to Survive AI</a></h3>
-                        <div class="blog-meta">January 14, 2026</div>
-                        <p class="blog-excerpt">A thought experiment on the future of humanity in an AI-driven world, and practical advice on how to stay relevant.</p>
-                        <a href="blog/how-to-survive-ai.html" class="read-more">Read more</a>
-                    </article>
-                    <article class="blog-post">
-                        <h3><a href="blog/homelabbing-and-my-home-server.html">What Is Homelabbing? Inside My Personal Home Server</a></h3>
-                        <div class="blog-meta">July 15, 2025</div>
-                        <p class="blog-excerpt">A practical tour of homelabbing—why I run my own server, what it powers, networking, ops, and lessons learned.</p>
-                        <a href="blog/homelabbing-and-my-home-server.html" class="read-more">Read more</a>
-                    </article>
-                    <article class="blog-post">
-                        <h3><a href="blog/nipux-private-ai-server.html">Owning Intelligence: Why Private AI Is Your Next Competitive Edge</a></h3>
-                        <div class="blog-meta">July 14, 2025</div>
-                        <p class="blog-excerpt">How Nipux is democratizing private AI infrastructure and why owning your intelligence beats renting it from cloud providers.</p>
-                        <a href="blog/nipux-private-ai-server.html" class="read-more">Read more</a>
-                    </article>
-                </div>
-            </section>
-
-            <section id="contact" class="section">
-                <h2 class="section-title">Contact</h2>
-                <div class="contact-links">
+                <div class="links" aria-label="Links">
                     <a href="mailto:kai@kaios.ca">Email</a>
                     <a href="https://github.com/KaiStephens">GitHub</a>
-                    <a href="https://twitter.com/kaiostephens">Twitter</a>
-                    <a href="https://nipux.com">Nipux</a>
+                    <a href="https://twitter.com/kaiostephens">Twitter/X</a>
+                    <a href="https://huggingface.co/kai-os">Hugging Face</a>
                 </div>
             </section>
+
+            <section class="writing" aria-labelledby="writing-title">
+                <h2 id="writing-title">Writing</h2>
+                <ul class="writing-list">
+                    <li>
+                        <a href="blog/blue-cloth-cover.html">Blue Cloth Cover</a>
+                        <span class="meta">Short fiction</span>
+                    </li>
+                </ul>
+            </section>
         </main>
-
-        <footer>
-            <p>© 2024 Kai Stephens</p>
-        </footer>
     </div>
-
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-    </script>
 </body>
 </html>
